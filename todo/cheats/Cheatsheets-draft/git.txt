@@ -1,0 +1,17 @@
+Git cheetsheet
+==============
+
+### undo 'git add'
+revert an unwanted 'git add .'
+    git reset .
+
+
+
+
+Error: `allowunannotated=$' unexpected
+--------------------------------------
+### problem
+hooks/update: syntax error at line 40: `allowunannotated=$' unexpected
+error: hooks/update exited with error code 2
+### solution
+    chmod -x ~/git/*/hooks/*

@@ -1,0 +1,44 @@
+Shell Tools
+===========
+
+    (C) 2010-2011 Ben, srctxt.org
+    cheatsheets, shell
+
+Some of the most important unix tools
+
+***
+
+
+* test (builtin)
+    -z, -n
+
+
+* rm 
+
+rm -rf foodir
+
+* tr
+
+* cut
+
+* sort
+
+* sed 
+    -e
+
+* cat
+
+* expr
+
+* echo
+
+* printf
+
+* uniq
+
+
+### cp
+
+Copy all  SOURCE arguments into -t targetdir:
+
+    grep -lir foo /tmp/ | xargs cp -t ~/mydir/

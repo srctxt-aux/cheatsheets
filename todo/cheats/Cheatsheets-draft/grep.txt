@@ -1,0 +1,99 @@
+Grep CheatSheet
+==============
+
+
+Usage
+-----
+
+grep [options] [regex pattern] [File]|[Glob]
+
+Options
+-------
+
+	-e pattern (expression
+can be used to specify multiple patterns
+
+	-f file 
+optain patterns from file, one per line
+
+	-r (recursive)
+search Recursively through subdirectories
+
+	-i, --ignore-case (posix)
+case Insensitive search
+
+	-l, --files-with-matches (posix)
+show only the filename
+
+	-L, --files-without-match 
+
+	-h, --no-filename
+no filename
+
+	-H, --with-filename
+filename: result
+
+	-A, --after-context=num
+show lines ater match
+
+	-B, --before-context=num
+show lines before match
+
+	-C, --context=num
+show lines before and after the match
+
+	-o, --only matching
+show only the matched word
+
+	-w --word-regexp
+whole words only
+
+	-n (numbers)
+print output with line numbers
+
+	-v --invert-match (posix)
+all except the search
+
+	-c 
+number of matches
+
+	-x, --line-regexp (posix)
+only exact matches the whole line
+
+	-q, --quiet
+no output, exit with status 0 when match
+
+
+
+Regex meta characters
+---------------------
+
+[]    bracket expression:
+      [abc]			-> 'a' or 'b' or 'c'
+      [ABC]			-> 'A' or 'B' or 'C'
+	  [a-z]			-> from 'a' to 'z'
+	  [-ab], [ab-]	-> 'a' or 'b' or '-'
+	  [a.b]			-> 'a' or '.' or 'b'
+	  [\a]			-> backlashes not allowed
+	  []], [^]]		-> ']', not ']'
+
+[^]	  exclusion in brackets:
+	  [^abc]		-> not 'a', not 'b', not 'c'
+
+.     any characters
+      in brackets the . is literal
+
+^	  start position of string or line
+
+$	  end position of string of line
+
+*     matches preceding element zero or more times
+      ab*c	-> ac, abc, abbbbc
+
+		grep 'ab*c' mytest.txt
+
+
+a\{3,8} 
+     matches 'a' at least 3 times but not more than 8 times
+
+		grep 'a\{3,8}' mytest.txt

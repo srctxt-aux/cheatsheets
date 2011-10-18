@@ -1,0 +1,11 @@
+
+
+# zip folders
+
+zip -9 -r <zip file> <folder name>
+
+# To zip a single file:
+
+zip -9 <zip file> <filename>
+
+# Use "-9" for best compression. The compressed file works fine with Windows XP compression tool.

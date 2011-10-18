@@ -1,0 +1,29 @@
+#   Error: Firefox profile in use  #
+    __________________________
+
+    Copyright (C) 2010 Ben
+
+    24-06-2010, leaking.org
+    notes / firefox / errors
+    __________________________
+
+
+What to do in case Firefox complains about a "Firefox profile already in use".
+
+
+Error
+-----
+
+	Firefox cannot use the profile <profile name> because it is in use. To continue, close the running instance of Firefox or choose a different profile.
+
+Solutions
+---------
+
+Solution for Mac OS X
+
+	find ~/Library -iname '*parentlock' -exec rm -rf {} \;
+
+Solution for Linux
+
+	find ~/.mozilla/Firefox -iname '*parentlock' -exec rm -rf {} \;
+

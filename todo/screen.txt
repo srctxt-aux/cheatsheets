@@ -1,0 +1,5 @@
+
+
+split verticaly :
+
+	ctrl-g; : split -v

@@ -1,0 +1,15 @@
+
+#   Global Git Ignore   #
+    __________________________
+
+    Copyright (C) 2010 Ben
+    18-06-2010, leaking.org
+    notes / git / config 
+    __________________________
+
+
+Because *.swp, *.o should not be under version control
+
+    $ git config --global core.excludesfile ~/.gitignore 
+    $ printf ".DS_Store\nThumbs.db\n" >> ~/.gitignore
+

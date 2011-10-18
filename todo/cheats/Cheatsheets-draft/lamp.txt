@@ -1,0 +1,70 @@
+##### apache #####
+Cheatsheet for Apache
+=====================
+ben le kuin <ben@lekuin.org>
+5 fev 2010
+:tags: cheatsheet, apache
+
+The default setting for this document is Apache 2 on Ubuntu
+
+
+Start and Stop Apache
+---------------------
+
+	/etc/init.d/apache2
+
+start|stop|restart|
+reload|force-reload|start-htcacheclean|stop-htcacheclean|status
+
+	sudo apt-get install apache2 apache2-doc apache2-utils
+
+Monitoring
+----------
+Is apache running
+
+	ps ax | grep -i apache
+
+	ps ax | grep -i httpd
+
+Apache status:
+
+	/etc/init.d/apache2 status
+
+
+
+
+update-rc.d apache2 defaults
+
+$APACHE_HOME
+##### apache2  #####
+====== Apache on Ubuntu: Commands and Locations ======
+							
+	ubuntu 	8.04, Apache 2.2.8	
+	ben@jakbot, 02. Juni 2008		
+
+
+
+
+===== Apache =====
+
+    sudo /etc/init.d/apache2 start
+    sudo /etc/init.d/apache2 stop
+    sudo /etc/init.d/apache2 restart
+
+===== MySQL =====
+
+    sudo /etc/init.d/mysql start
+    sudo /etc/init.d/mysql stop
+    sudo /etc/init.d/mysql restart
+    
+    sudo vim /etc/mysql/my.cnf
+
+===== Locations =====
+
+    /var/www/ -- Document Root
+    http://localhost/phpmyadmin -- phpMyAdmin
+    /usr/share -- phpMyAdmin local location
+
+##### apache2  #####
+##### mysql  #####
+##### mysql  #####

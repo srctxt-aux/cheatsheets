@@ -1,0 +1,38 @@
+apt-get: Packagemanagement for a Debian System
+================================================
+
+to install a package:
+# apt-get install NameOfPackage
+
+to reinstall a package
+# apt-get install --reinstall NameOfPackage
+
+To test the remove command first, use:
+# apt-get remove tuxpaint —dry-run
+
+to remove a package:
+# apt-get remove NameOfPackage
+
+To remove several packages, use a space-delimited list:
+# apt-get remove tuxkart gltron frozen-bubble tuxracer nethack galaga
+
+to remove a package and configuration file:
+# apt-get --purge remove NameOfPackage
+
+to search for a package:
+# apt-cache search NameOfPackage
+
+to update the repository (list of avalible .deb's):
+# apt-get update
+
+to upgrade your system (can be useful in maintaining an up-to-date system):
+# apt-get upgrade
+
+to upgrade your distribution (tries to choose packages needed to upgrade your dist):
+# apt-get dist-upgrade
+
+to enable smart-tab completion, add the line
+source /etc/bash_completion
+to your .bashrc file. When you enter a command like "apt-get install a<tab>," bash will auto-complete the entry.
+to see a short list of common commands:
+# apt-get --help

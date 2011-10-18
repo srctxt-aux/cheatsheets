@@ -1,0 +1,13 @@
+#   Setting JAVA_HOME on Mac OS X   #
+    __________________________
+
+    Copyright (C) 2010 Ben
+
+    14-06-2010, leaking.org
+    notes / macosx / java
+    __________________________
+
+
+Default path for java on mac os x
+
+    export JAVA_HOME=/Library/Java/Home

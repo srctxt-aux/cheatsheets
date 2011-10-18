@@ -1,0 +1,19 @@
+Find cheatsheet
+===============
+
+find all files except the file that is given:
+    find -not -iname "sanefile.c"
+
+
+just print the filename
+
+	 find . -name '*.deb' -printf "%f\n"
+
+or 
+
+	find . -name '*.deb' | xargs -n1 basename
+
+
+use wildcard in nested pathes
+
+	find . -name foo\*bar

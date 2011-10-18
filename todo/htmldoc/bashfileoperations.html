@@ -1,0 +1,39 @@
+<h1>Cheatsheet Bash file operations</h1>
+
+<pre><code>by: ben, srctxt.org
+in: cheatsheets, bash,
+</code></pre>
+
+<h2>Loop over files</h2>
+
+<h3>Use Globbing</h3>
+
+<p>For globbing safely I use the following construct</p>
+
+<pre><code>foodir=x
+
+[ -d "$foodir" ] &amp;&amp;        # (1)
+for f in "$foodir"/* ; do
+    [ -e "$f" ] || continue ;  # (2)
+    echo f $f
+done
+</code></pre>
+
+<p>(1) The existance of a directory $foodir prevents stuff like</p>
+
+<pre><code>rm -rf $f   == rm -rf /usr
+</code></pre>
+
+<p>(2) The test -e prevents $f to be *</p>
+
+<h3>Use Pipe</h3>
+
+<pre><code>ls x | while read f; do echo f $f; done
+</code></pre>
+
+<p>or</p>
+
+<pre><code>ls x | while read f; do 
+    echo f $f
+done
+</code></pre>

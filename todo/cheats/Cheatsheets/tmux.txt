@@ -1,0 +1,19 @@
+Cheatsheet Tmux
+===============
+
+    Copyright (C) 2011 Ben
+    2011-01-03 / srctxt.org
+    cheatsheet, tmux
+
+Common key strokes and command for the console window manager 'tmux'.
+
+---
+
+
+### kill a window
+
+`tmux kill-window -t0:1`
+
+Will kill window 1 in session 0.
+
+

@@ -1,0 +1,58 @@
+How to use scp
+=============
+ben le kin <ben@lekin.org>
+v1.1, 28. mai 2010
+:tags: scp usage
+
+Contents:
+
+<<intro, Intro>>
+
+<<usage, Usage>>
+
+<<ssh, use scp with ssh keys>>
+
+
+
+[[intro]]
+Intro
+-----
+
+With scp you can do secure file transfers to and from local or remote systems.
+
+
+[[usage]]
+Usage
+-----
+
+To use the scp command to copy files between systems, use the following command:
+
+	scp filename1 userid@hostname:filename2
+
+For example:
+
+	scp myfile jdoe@foobar.comu:myfile
+
+
+-r option for directories
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To use the scp command to copy directories between systems, use the following command:
+
+      scp -r directoryname userid@hostname:directoryname
+
+
+[[ssh]]
+Use ssh with scp keys
+----------------------
+
+If you defined ssh keys you can use them:
+
+- with the -i option you can choose your id file in ~/.ssh
+
+	ssh -i myfile jdoe@myserver.com:~/
+
+- or you even can use a handle from a server defined in ~/.ssh/config (without username and fqn)
+
+	scp myfile remoteserver:~/
+

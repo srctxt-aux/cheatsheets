@@ -1,0 +1,216 @@
+<h1>Cheatsheet Minimal Perl</h1>
+
+<pre><code>(C) 2011 Ben, srctxt.org
+in: cheatsheets, perl
+</code></pre>
+
+<p>Minimal Perl is coined by a book of dr. tim maher that goes by the same name and means a minimal unixy programming style in Perl.</p>
+
+<hr />
+
+<p>The main reason for me to examine Minimal Perl is to write simple filters that be used in Unix Piping mechanism.</p>
+
+<h2>Index</h2>
+
+<ul>
+<li>most important Perl switches</li>
+<li>Variables</li>
+<li>compare maximal to minimal</li>
+<li>BEGIN and END</li>
+<li>Examples </li>
+</ul>
+
+<h2>Most important Perl switches</h2>
+
+<pre><code>-e    Expression
+
+-w    Warnings
+-p    Reading and printing from INPUT
+-n    Reading, but no printing from INPUT, you have to `print` explecetly
+-l    Line end processing
+
+-i Edit files in-place
+-M Use module
+-a Automatically split input
+-0 Change input record separator
+</code></pre>
+
+<h2>Variables</h2>
+
+<pre><code>$_   Data Variable: with -n / -p contains read input record
+$.   Number Variable: Number of read input record
+</code></pre>
+
+<p>Example ( a 'cat' program):</p>
+
+<pre><code>perl -wnl -e 'print "$.: $_;"' linux.txt
+</code></pre>
+
+<h2>Perl as Grep</h2>
+
+<h3>Just output filenames (grep -l)</h3>
+
+<p>like </p>
+
+<pre><code>grep -l 'regex' file.txt
+</code></pre>
+
+<p>print filenames</p>
+
+<pre><code>perl -wnl -e '/regex/ and print $ARGV and close ARGV;' file.txt
+</code></pre>
+
+<p>-> as soon as the regex kicks in print the filename, and then close the file, because we don't need it anymore.</p>
+
+<p>in contrast, thist print all the lines:</p>
+
+<pre><code>perl -wnl -e '/regex/ and print;' file.txt
+</code></pre>
+
+<h3>Ignore case (grep -i)</h3>
+
+<pre><code>perl -wnl -e ' /regex/i and print;' file.txt
+</code></pre>
+
+<h3>Chaining grep filters</h3>
+
+<pre><code>perl -wnl -e '/foo/ and /bar/ and print;' myfiles.txt
+</code></pre>
+
+<h2>What is Minimal Perl</h2>
+
+<h3>Compare maximal to minimal</h3>
+
+<p>Print contents of file</p>
+
+<h3>Maximal</h3>
+
+<pre><code>#!/usr/bin/perl -w
+
+foreach my $file (@ARGV){
+    open(my $IN, '&lt;', $file) || die "Error: $! \n";
+    while ( my $line = &lt;$IN&gt; ){
+        if ( $line =~ /hello/ ){
+            print $line; 
+        }
+    }
+    close $IN || die "Error: $! \n";
+}
+</code></pre>
+
+<h3>Minimal</h3>
+
+<pre><code>perl -wnl -e '/hello/ &amp;&amp; print' linux.txt
+</code></pre>
+
+<h2>BEGIN and END</h2>
+
+<p>Typical scenario:</p>
+
+<ol>
+<li>Write a header</li>
+<li>Loop through files</li>
+<li><p>Write a footer</p>
+
+<h1>!/usr/bin/perl -wnl</h1>
+
+<p>BEGIN {
+    print "This is my HEADER \n";
+}
+if (/hello/){
+    print; 
+}</p>
+
+<p>END {
+    print "This is my FOOTER \n";
+}</p></li>
+</ol>
+
+<h2>Loops</h2>
+
+<p>for(@ARGV){
+    print $OUT $txt;</p>
+
+<p>}</p>
+
+<h2>Examples</h2>
+
+<h3>A sed command</h3>
+
+<p>!! Use -wpl and NEVER -wnl with -i ( wipes file)</p>
+
+<pre><code>perl -wpl -i -e 's/foo/bar/g' file.txt
+</code></pre>
+
+<h3>Regular expressions</h3>
+
+<pre><code>echo 'foo bar' | perl -nle 'm/.*(foo).*/; print "$1"'
+</code></pre>
+
+<h3>loop through files</h3>
+
+<h4>With the -n switch</h4>
+
+<p><code>ls *.txt | perl -ne 'print "hi $_"'</code>
+or 
+<code>perl -ne 'print "hi $_"' *.txt</code></p>
+
+<p>results in :</p>
+
+<pre><code>hi file1
+hi file2
+hi file3
+...
+</code></pre>
+
+<h4>With the -p switch</h4>
+
+<p><code>ls *.txt | perl -pe 'print "hi $_"'</code>
+or 
+<code>perl -pe 'print "hi $_"' *.txt</code></p>
+
+<p>results in :</p>
+
+<pre><code>hi file1
+file1
+hi file2
+file2
+hi file3
+file3
+...
+</code></pre>
+
+<h3>Search and replace</h3>
+
+<p>! It is important to use the -p switch (with -n its possible to overwrite a file)</p>
+
+<p><code>perl -i -p -e 's/oldstring/newstring/g' *.txt</code>
+or
+<code>ls *.txt | xargs perl -pi -e 's/oldstring/newstring/g'</code>
+or
+<code>find . -iname '*.txt' | xargs perl -pi -e 's/oldstring/newstring/g'</code></p>
+
+<p>replace all occurences in .txt files</p>
+
+<h2>Examples</h2>
+
+<h3>Extract a substring</h3>
+
+<pre><code>echo '#!/usr/bin/perl' | perl -wpl -e 's/.*\/(\w*)$/$1/g'
+</code></pre>
+
+<p>perl</p>
+
+<h2>Perl Loop through Files</h2>
+
+<p>Defaul file name and current line</p>
+
+<pre><code>#!/usr/bin/perl -wnl
+print "$ARGV: $_ ";
+</code></pre>
+
+<h3>Print a regex</h3>
+
+<pre><code>#!/usr/bin/perl -wnl
+/reg(ex)/ print "$1";
+</code></pre>

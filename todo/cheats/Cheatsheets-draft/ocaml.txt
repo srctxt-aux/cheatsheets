@@ -1,0 +1,9 @@
+Ocaml Cheatsheet
+=================
+
+
+Camlp4
+------
+
+### Printing out the ocaml code from a syntax extension
+	camlp4o ./pa_mikmatch_str.cma -printer o test1.ml > test1.ppo

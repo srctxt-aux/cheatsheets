@@ -1,0 +1,9 @@
+mac commands
+============
+
+
+
+1. show hidden files and folders:
+
+- # defaults write com.apple.Finder AppleShowAllFiles YES
+- # killall Finder

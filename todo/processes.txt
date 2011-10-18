@@ -1,0 +1,21 @@
+Processes Cheatsheet
+====================
+
+    by: Ben, srctxt.org
+    in: linux, process-management, jobs
+
+_How to handle processes on linux_
+
+***
+
+nice
+----
+
+renice
+------
+
+ps
+--
+
+top
+---

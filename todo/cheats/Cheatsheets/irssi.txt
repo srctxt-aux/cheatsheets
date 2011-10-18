@@ -1,0 +1,27 @@
+Irssi Cheatsheet 
+================
+
+    (C) 2010 Ben, leakin.org
+    cheatsheets, irssi
+
+Irssi, the command line (cli) Internet Relay Chat (IRC) client.
+
+****
+
+
+### Setup a nick
+
+    /set nick Ben
+
+
+### Connect
+
+    /connect irc.freenode.net
+
+
+### Join a Channel
+
+    /j mirage
+
+
+

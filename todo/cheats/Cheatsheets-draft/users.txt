@@ -1,0 +1,28 @@
+Cheatsheet Linux Users and Groups
+=================================
+Ben le Kin <ben@lekin.org>
+v1.0, June 1` 2010
+:tags: cheatsheet, linux, users
+
+Files
+-----
+
+Users are stored in the following file:
+
+x = password is set (the passwords are hashed in /etc/shadow)
+
+- Users = '/etc/passwd'
+
+that has the following format
+
+- username:x:userid:groupid:user-info/comments:home-dir:default-shell
+
+
+Groups are stored in:
+
+- Groups = '/etc/group'
+
+- groupname:x:groupid:user1,user2,...
+
+
+- Groups = '/etc/group'a

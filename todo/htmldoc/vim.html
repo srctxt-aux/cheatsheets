@@ -1,0 +1,27 @@
+<h1>Vim Cheatsheet</h1>
+
+<pre><code>by: Ben, srctxt.org
+in: cheatsheets, vim
+</code></pre>
+
+<p><em>Most important command for vim.</em></p>
+
+<hr />
+
+<h3>Text block editing</h3>
+
+<p>Go to the first line of the block, and then:</p>
+
+<pre><code>1. ctrl+v
+2. move with e.g. 5j
+3. go in insert with 'I'
+4. Insert your stuff, e.g.: I + #
+5. Esc
+</code></pre>
+
+<h3>Mapping</h3>
+
+<p>map a key to insert and command mode</p>
+
+<pre><code>:nmap &lt;F5&gt; :ls&lt;cr&gt;:b |imap &lt;F5&gt; &lt;esc&gt;&lt;F5&gt;|vmap &lt;F5&gt; &lt;esc&gt;&lt;F5&gt;
+</code></pre>

@@ -1,0 +1,18 @@
+<h1>Cheatsheet Perl IO</h1>
+
+<pre><code>by: ben, srctxt.org
+in: cheatsheets, perl
+</code></pre>
+
+<h2>Read files</h2>
+
+<pre><code>#!/usr/bin/perl -w
+
+$filename=$ARGV[0];
+
+open FH, '&lt;', $filename || die $!;
+while(&lt;FH&gt;){
+    print;
+}
+close FH;
+</code></pre>

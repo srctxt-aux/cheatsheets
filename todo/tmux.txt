@@ -1,0 +1,31 @@
+                        Cheatsheet Tmux
+                        ***************
+
+                  Copyright (c) 2011 Ben, srctxt.org
+                  first/last: 2011-01-03/2011-08-20
+                     tags: cheatsheet, tmux
+
+> Common key strokes and command for the console window manager 'tmux'.  <
+
+
+                             ~~&~~
+
+
+
+#winkill | Kill a window
+========================
+
+`tmux kill-window -t0:1`
+
+Will kill window 1 in session 0.
+
+
+#cmdsend | Send a command
+========================
+
+>>>>>
+
+tmux send-keys -t 0 'echo foo'; tmux send-keys -t 0 'Enter'
+
+<<<<<
+

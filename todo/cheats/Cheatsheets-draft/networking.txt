@@ -1,0 +1,26 @@
+Title:  Cheatsheet for networking commands
+Author: har lekin
+Date:   21 nov 2009
+Keywords: cheatsheet, network
+
+
+Listening to open ports
+-----------------------
+
+Show which process runs on which open port
+
+    # netstat -tulpn
+
+  * t - tcp
+  * u - udp
+  * l - only listening processes
+  * p - show process name
+  * n - do not resolve address
+
+
+Check open port exernally
+
+    # telnet 10.0.0.3 80
+    # ...
+    # quit
+

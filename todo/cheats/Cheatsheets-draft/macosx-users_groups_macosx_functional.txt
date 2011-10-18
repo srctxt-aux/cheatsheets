@@ -1,0 +1,87 @@
+Creating functional Users and Groups on Mac OSX 
+===============================================
+
+    Manage functional user and group administration on Mac OSX 10.5
+    ben@jakb.org, 21. fev. 2009
+    macosx, admin
+
+Functional users and groups
+---------------------------
+
+Are used for services like mysql or apache
+
+
+List Users and Groups
+---------------------
+list groups
+
+    sudo dscl . -list /groups
+
+check IDs
+
+    sudo dscl . -list /Groups PrimaryGroupID
+
+Read Users and Groups
+---------------------
+read specific group 'mygroup'
+
+    sudo dscl . -list /Groups PrimaryGroupID | grep mygroup
+
+read specifig user 'myuser'
+
+    sudo dscl . -list /Users PrimaryGroupID | grep myuser
+
+
+Usecase: Create a group, and a user, append user to group
+---------------------------------------------------------
+We create functional group and user, so we'll beginn with 
+underscores:
+
+    _mygroup
+    _myuser
+
+
+### 1.) Create a group ###
+
+    # Create the groupname with an underscore
+    sudo dscl . -create /Groups/_mygroup
+    # Check the ID first
+    sudo dscl . -list /Groups PrimaryGroupID | grep 110
+    sudo dscl . -list /Users UniqueID | grep 110
+    # Create an unique GroupID
+    sudo dscl . -create /Groups/_mygroup PrimaryGroupID 110
+    # Create an alias
+    sudo dscl . -append /Groups/_mygroup RecordName mygroup
+    # Create a long name for the group id
+    sudo dscl . -create /Groups/_mygroup RealName "My Group"
+
+### 2.) Create the user ###
+
+    sudo dscl . -create /Users/_myuser
+    sudo dscl . -append /Users/_myuser RecordName myuser
+    sudo dscl . -create /Users/_myuser RealName "My User"
+    sudo dscl . -create /Users/_myuser UniqueID 110   
+    sudo dscl . -create /Users/_myuser UserShell /bin/nobash
+
+### 3.) Append the user into the group ###
+
+    sudo dscl . -create /Users/_myuser PrimaryGroupID 110
+    sudo dscl . -append /Groups/_mygroup GroupMembership _myuser
+
+### 4.) Check the membership ###
+
+    sudo dscl . -read /Groups/_mygroup GroupMembership
+
+
+Removing Users and Groups
+-------------------------
+
+Removing the user from the group
+
+    sudo dscl . delete /Groups/_mygroup GroupMembership _myuser
+
+Delete group and user
+
+    sudo dscl . -delete /Groups/_mygroup
+    sudo dscl . -delete /Users/_myuser
+

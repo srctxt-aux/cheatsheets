@@ -1,0 +1,26 @@
+Perl Cheatsheet
+===============
+
+	ben@leakin.org, 21-09-2010
+	cheatsheet, perl
+
+Files and Folder
+----------------
+	Look in ./perl/filesdirs.md
+
+Perl Oneliner
+-------------
+
+Perl oneliner flags
+
+Flag Result
+ -e Execute code on command line
+ -w Warnings (advised...)
+ -l Automatically add newlines
+ -n Automatically loop through lines
+ -p Automatically loop and print each line
+ -i Edit files in-place
+ -a Automatically split input
+ -M Use module
+ -0[d] Change input record separator
+

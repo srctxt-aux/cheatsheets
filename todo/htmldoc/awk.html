@@ -1,0 +1,31 @@
+<h1>Awk Cheatsheet</h1>
+
+<pre><code>Copyright (c) 2011 Ben, srctxt.org
+dates: 30.05.2011/3.08.2011
+tags: cheatsheets, awk
+</code></pre>
+
+<p>All the minimal awk stuff for what Perl not worth starting.</p>
+
+<hr />
+
+<h1>toc ## Contents</h1>
+
+<p><a href="#print">Printing</a></p>
+
+<hr />
+
+<h1>print ## Printing</h1>
+
+<p>Print the 3rd coloumn:</p>
+
+<pre><code>awk '{print $3}'
+</code></pre>
+
+<p>if the is an other delimiter used then whitespace, 
+for example ';':</p>
+
+<pre><code>awk -F';' '{print $3}'
+</code></pre>
+
+<p><a href="#toc">top</a></p>

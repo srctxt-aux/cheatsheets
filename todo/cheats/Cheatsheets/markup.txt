@@ -1,0 +1,302 @@
+Markdown Cheatsheet      
+===================
+
+    Copyright (C) 2010 Ben srctxt.org
+    cheatsheets, markdown, markup
+
+Markdown is a simple markup language to write html or other documents.
+
+***
+
+Paragraphs
+----------
+
+Paragraps are text block delimited by o empty line
+
+    I am a paragraphkk
+
+    Me too
+
+_line breaks_ by appending two spaces at line ending               
+
+    This is a hard break__
+    New linkkke
+
+
+
+Links
+-----
+
+### automatic
+Automatic Links for urls and emails:
+
+    <http://www.web.com> 
+
+will turn into:
+
+    <a href=http://www.web.com>http://www.web.com</a>
+
+### inline
+Inline links:
+
+    [my web](http://web.com)
+
+and with a 'title' property
+    
+    [my web](http://web.com "title")
+
+### references
+Reference links:
+
+    [my web][id]
+
+define id
+
+    [id]: http://www.web.com
+
+
+Code Blocks
+-----------
+
+Create preformatted code blocks with 4 spaces or 1 tab
+
+    my super 
+    code
+
+Preceded by a space, the colon disappears :
+
+    my cool
+    code
+
+
+Blockquotes
+-----------
+
+Angle brackets are used for blockquotes and can be nested:
+
+    > a first level
+
+    >> a nested level
+
+    > ### a header
+    >
+    > * a list item
+    > * another list item
+    >
+
+
+Formatting
+----------
+
+### Emphasis
+
+    *italic*    or     _italic_
+
+    **bold**    or     **bold**
+
+### Code spans
+
+    ``you even can enclose `backticks` as code``
+
+
+Lists
+-----
+
+### Enumeration:
+
+    career plan:
+
+    1. buy new clothes
+    2. profit
+
+### Unordered:
+
+you can use: `` *, -, or + ``
+
+    * Apple      or    + Apple      or    - Apple
+    * Banane           + Banane           - Banane
+    * Citrone          + Citrone          - Citrone
+
+### Nested:
+
+    - Cars            or       * Foo
+        - Mercedes                1. test1
+        - BMW                     2. test2
+                                      - never
+                                      - ever
+                                      - always
+                                  3. doo
+
+### Escaping
+
+Special chars like `*, +, {}, [], (), ...` can be escaped with
+
+    you \* are my star \*
+
+Titles
+------
+
+### Setext style:
+
+    Title 1.0   Title 2.0
+    =========   ---------
+
+
+### atx style 
+( closing rautes are optional)
+
+    # Title 1.0 #
+
+    ## Title 2.0 ##
+
+    ...
+
+    ###### Title 6.0
+
+
+---------------------------------------------------------------
+
+## Markdown in Action
+
+
+Links
+-----
+
+### automatic
+Automatic Links for urls and emails:
+
+<http://www.web.com> 
+
+will turn into:
+
+<a href=http://www.web.com>http://www.web.com</a>
+
+### inline
+Inline links:
+
+[my web](http://web.com)
+
+and with a 'title' property
+    
+[my web](http://web.com "title")
+
+### references
+Reference links:
+
+[my web][id]
+
+define id
+
+[id]: http://www.web.com
+
+
+Code Blocks
+-----------
+
+Create preformatted code blocks with 4 spaces or 1 tab
+
+    my super 
+    code
+
+Preceded by a space, the colon disappears :
+
+    my cool
+    code
+
+
+Blockquotes
+-----------
+
+Angle brackets are used for blockquotes and can be nested:
+
+> a first level
+
+>> a nested level
+
+> ### a header
+>
+> * a list item
+> * another list item
+>
+
+
+Formatting
+----------
+
+### Emphasis
+
+*italic* and _italic_
+
+**bold** and **bold**
+
+### Code spans
+
+``you even can enclose `backticks` as code``
+
+
+Lists
+-----
+
+### Enumeration:
+
+career plan:
+
+1. buy new clothes
+2. profit
+
+### Unordered:
+
+you can use: `` *, -, or + ``
+
+todo list:
+
+* present for mom
+  (ideas: hamster, cadillac, ...)
+
+* find mate for life
+
+### Nested:
+
+- Cars
+    - Mercedes
+    - BMW
+
+* Foo
+    1. blaz
+    2. blof
+    3. dumt
+        - never
+        - ever
+        - always
+    4. doo
+* Bar
+
+### Escaping
+
+Special chars like `*, +, {}, [], (), ...` can be escaped with
+
+you \* are my star \*
+
+Titles
+------
+
+### Setext style:
+
+Title 1.0
+=========  
+
+Title 2.0 
+---------
+
+### atx style 
+( closing rautes are optional)
+
+# Title 1.0 #
+
+## Title 2.0 ##
+
+...
+
+###### Title 6.0
+
+

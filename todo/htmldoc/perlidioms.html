@@ -1,0 +1,219 @@
+<h1>Cheatsheet Perlidioms</h1>
+
+<pre><code>(C) 2011 Ben, srctxt.org
+in: cheatsheets, perl
+</code></pre>
+
+<hr />
+
+<p>[[whileforeach]]
+[[globbing]]</p>
+
+<h2>while vs foreach</h2>
+
+<p>In a lot of situation when looping through directories, files and lines 'while' or 'foreach' can be used.</p>
+
+<h3>while</h3>
+
+<ul>
+<li>recomended to use when iterate through lines</li>
+<li>scalar context</li>
+<li>reads one line at a time</li>
+<li>the $. (line number) can be used</li>
+</ul>
+
+<h3>foreach</h3>
+
+<ul>
+<li>for iterations through files</li>
+<li>uses more memory and time</li>
+<li>list context</li>
+<li>reads each line into a list, before goint through it line by line</li>
+</ul>
+
+<p>a foreach loop is equivalent to:</p>
+
+<pre><code>my @lines = &lt;$fh&gt;;
+for (@lines){
+    ...
+}
+</code></pre>
+
+<h2>STDIN</h2>
+
+<p>Three ways to get a Perl script input</p>
+
+<ol>
+<li><p>@ARGV
+./prog.pl foo.txt bar.txt</p></li>
+<li><p>STDIN</p>
+
+<p>echo 'foo bar' | ./prog.pl</p></li>
+<li><p>STDIN (interactive)</p>
+
+<p>./prog.pl
+foo <enter>
+bar <enter>
+CTRL-C</p></li>
+</ol>
+
+<h2>@ARGV</h2>
+
+<p>The names of the parameters in a array @ARGV</p>
+
+<p>./prog.pl foo bar</p>
+
+<p>is the same like</p>
+
+<pre><code>my @ARGV = ('foo', 'bar');
+</code></pre>
+
+<p>Loop through it.</p>
+
+<pre><code>#!/usr/bin/perl -wl
+foreach(@ARGV){
+    print;
+}
+</code></pre>
+
+<p>foo
+bar</p>
+
+<p>It's also possible to define @ARGV:</p>
+
+<pre><code>my @ARGV = ('foo.txt', 'bar.txt');
+</code></pre>
+
+<p>Get single items:</p>
+
+<pre><code>my $arg = $ARGV[0];
+</code></pre>
+
+<p>or more idiomatic</p>
+
+<pre><code>my $arg = shift @ARGV;
+</code></pre>
+
+<h2>&lt;> - the diamond operator</h2>
+
+<p>If the items in @ARGV are files.</p>
+
+<p>Loops through all files in (@ARGV) and then through each line </p>
+
+<p>./myprog.pl foo.txt</p>
+
+<pre><code>#!/usr/bin/perl -w
+while(&lt;&gt;){
+    if ( /hello/ ){
+        print; # prints the line that matches 'hello'
+    }
+}
+</code></pre>
+
+<p>This is whats happended for every files:</p>
+
+<pre><code>#!/usr/bin/perl -w
+
+foreach (@ARGV){
+    open(my $IN, '&lt;', $_) || die "Error: $! \n";
+    while (&lt;$IN&gt;){
+        if ( /hello/ ){
+            print; 
+        }
+    }
+    close $IN || die "Error: $! \n";
+}
+</code></pre>
+
+<ul>
+<li>is the programm invoked from command line?</li>
+<li>read one file at time</li>
+<li>reads one line at time</li>
+</ul>
+
+<h2>$_</h2>
+
+<h3>print</h3>
+
+<pre><code>print $_;
+</code></pre>
+
+<p>same as</p>
+
+<pre><code>print;
+</code></pre>
+
+<h3>regex</h3>
+
+<pre><code>if $_ =~ /foobar/ { ... };
+</code></pre>
+
+<p>same as</p>
+
+<pre><code>if /foobar/ { ... ;}
+</code></pre>
+
+<h3>foreach</h3>
+
+<pre><code>foreach $_ (@list) { print $_ };
+</code></pre>
+
+<p>same as</p>
+
+<pre><code>foreach (@list) { print };
+</code></pre>
+
+<h3>while</h3>
+
+<pre><code>while ( defined( $line = &lt;STDIN&gt; ) ){
+    if ($line =~ /foo/ ){
+        print $line;
+    }
+}
+</code></pre>
+
+<h3>map</h3>
+
+<pre><code>my @txt = map { print $_ } @items;
+</code></pre>
+
+<p>same as</p>
+
+<pre><code>my @txt = map print, @items;
+</code></pre>
+
+<p>same as</p>
+
+<pre><code>while (&lt;STDIN&gt;){
+    if (/foo/){
+        print;
+    }
+}
+</code></pre>
+
+<h2>Globbing</h2>
+
+<p>Loop through all files in directory</p>
+
+<pre><code>#!/usr/bin/perl -wl
+
+while(&lt;*&gt;){
+    print;
+}
+</code></pre>
+
+<p>./loop.pl .</p>
+
+<p>foo.txt
+bar.txt</p>
+
+<h3>glob</h3>
+
+<p>there is also a 'glob()' function that does the same:</p>
+
+<pre><code>#!/usr/bin/perl -wl
+
+while(glob('*')){
+    print;
+}
+</code></pre>

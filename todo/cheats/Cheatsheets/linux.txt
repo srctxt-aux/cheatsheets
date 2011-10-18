@@ -1,0 +1,5 @@
+linux cheatsheet
+================
+
+## which processes run under port
+    lsof -i :8080

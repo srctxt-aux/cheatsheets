@@ -1,0 +1,19 @@
+#   Search multiple Files with find   #
+    _______________________________
+
+    Copyright (C) 2010 Ben
+
+    04-11-2010, leaking.org
+    notes / find / files
+    __________________________
+
+
+How to search for different file extensions with the `find` command.
+
+    find . -type f \( -iname "*.cm*" -or -iname "*.omc" \) -print
+
+Note: the included files have to be parenthesized.
+
+
+
+

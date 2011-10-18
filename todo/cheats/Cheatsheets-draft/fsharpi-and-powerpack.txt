@@ -1,0 +1,21 @@
+#   Fsharpi and PowerPack   #
+    __________________________
+
+    (C) 2010 Ben <leakin.org>
+    14-11-2010, snippets
+    fsharpi / fsi / powerpack
+    __________________________
+
+
+Among other features the *FSharp Powerpack* contains a Ocaml compatibility for functions like `print_int`, or `print_string`, here is how it can be referenced in fsharpi:
+
+    fsharpi
+    #r "FSharp.PowerPack.Compatibility.dll";;
+    #nowarn "62";;
+
+
+
+
+
+
+

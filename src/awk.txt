@@ -1,0 +1,38 @@
+Awk Cheatsheet
+**************
+
+Copyright (c) 2011 Ben, srctxt.org
+first/latest: 2011-05-03/2011-08-19
+tags: cheatsheets, awk
+
+> All the minimal awk stuff Perl is not worth starting for. <
+
+* * *
+
+#toc | Contents
+---------------
+
+[Printing](#print)
+
+
+#print | Printing
+-----------------
+
+
+Print the 3rd coloumn:
+
+>>>>>>
+
+    awk '{print $3}'
+
+<<<<<<
+
+if the is an other delimiter used then whitespace, 
+for example ';':
+
+>>>>>>
+
+    awk -F';' '{print $3}'
+<<<<<<
+
+[top](#toc)

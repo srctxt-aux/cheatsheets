@@ -1,0 +1,152 @@
+Bash cheatsheet
+===============
+
+Robust Scripts
+--------------
+
+### set -u
+
+with set -u, which will exit your script if you try to use an uninitialised variable
+
+### set -e
+
+This tells bash that it should exit the script if any statement returns a non-true return value. 
+
+### Be prepared for spaces in filenames
+
+if [ $filename = "foo" ]; 
+
+will fail if $filename contains a space. Do: 
+
+if [ "$filename" = "foo" ]; 
+
+When using $@ variable, you should:
+david% foo() { for i in $@; do echo $i; done }; foo bar "baz quux"
+bar
+baz
+quux
+david% foo() { for i in "$@"; do echo $i; done }; foo bar "baz quux"
+bar
+baz quux 
+
+### print0
+ If you use find and xargs together, you should use -print0 to separate filenames with a null character rather than new lines. You then need to use -0 with xargs.
+
+david% touch "foo bar"
+david% find | xargs ls
+ls: ./foo: No such file or directory
+ls: bar: No such file or directory
+david% find -print0 | xargs -0 ls
+./foo bar 
+
+Files and Directories
+---------------------
+
+### Check if exists
+#### File 
+
+	[ -f /etc/passwd ] && echo "File exists" || echo "File does not exists"
+
+#### Directory 
+
+  [ -d /var/logs ] && echo "Directory exists" || echo "Directory does not exists"
+
+#### Use it in a script
+
+  #!/bin/bash
+  FILE=$1
+  if [ -f $FILE ];
+    then
+    echo "File $FILE exists"
+  else
+    echo "File $FILE does not exists"
+  fi
+
+#### Piping text in a write-protected file
+	echo "mytext" | sudo tee -a MYFILE
+
+#### change or set date
+    date -s "2 OCT 2006 18:00:00"
+
+#### create tarball
+	# use option -c to create an archive (it's compressed with -z)
+	tar -cvzf name.tgz subdir
+
+
+#### read command line options/arguments
+
+	
+	all=false
+	save=false
+	message=""
+	while case "$#" in 0) break ;; esac
+	do
+		case "$1" in
+			-a | --all)
+				all=1
+				;;
+			-s | --save)
+				save=1
+				;;
+			-m)
+				shift
+				if test "$#" = "0"; then
+					echo "Error: option -m needs an argument"
+					exit 1;
+				elif [[ $1 =~ ^-.* ]];then # prevent -m -k
+					usage
+				else
+					message="$1"
+					echo "mess: $message";
+				fi
+				;;
+			-h|--help)
+				usage
+				;;
+
+			-*)
+				usage
+				;;
+			*)
+				break
+				;;
+		esac
+		shift
+	done
+
+
+
+# Solaris
+# -------
+### To get Solaris version number
+# To get the version number of the operating system on a Solaris system:
+    less /etc/release
+# To get architecture info:
+    isainfo -
+
+# Ubuntu
+# ------
+# ### ubuntus version
+# which version am I running on 
+  lsb_release -a
+
+# Problems
+# --------
+
+# ### Error in ssh, sftp, scp: Received message too long (or "Bad packet length") 1
+# If you are have problems using sftp or scp and receive an error message similar to Received message too long (or "Bad packet length") 1416586337 Then check that your login scripts are not outputting any unexpected messages for non-interactive connections. For more information see http://www.snailbook.com/faq/sftp-corruption.auto.htm
+
+## Tricks
+
+!! - executes the previous command usefull
+sudo !!
+
+cd - - is like the back button
+cd -
+
+bind -p - shows all your  keyboard shortcuts
+ 
+rename - batch rename
+$ rename 's/text_to_find/been_renamed/' *.txt
+
+ls -d */ - only subdirs

@@ -1,0 +1,39 @@
+via http://bashcurescancer.com/10-steps-to-beautiful-shell-scripts.html
+
+Linux gurus don’t use cut, awk, and sed when they want to replace or strip out a portion if a variable. They use parameter substitution. You can learn parameter substitution in less than 2 minutes. Here is the ten things you need to know:
+
+Shell variables can be specified like $var or this ${var}.
+$ var='a.ads,fssd2342%asd234#@.,&%,sdfgsdfgas4352'
+echo ${var}
+a.ads,fssd2342%asd234#@.,&%,sdfgsdfgas4352
+${#var} is the length of the variable.
+$ echo ${#var}
+42
+${var:pos} substrings the variable starting at pos.
+$ echo ${var:10}
+2342%asd234#@.,&%,sdfgsdfgas4352
+${var:pos:len} substrings the variable starting at pos with a max length of len.
+$ echo ${var:10:5}
+2342%
+${var#pattern} strips pattern from the front or left hand side of the variable. This form is not greedy meaning it stops as soon as the pattern is matched. ${var##pattern} is the greedy form.
+$ echo ${var#*,}
+fssd2342%asd234#@.,&%,sdfgsdfgas4352
+$ echo ${var##*,}
+sdfgsdfgas4352
+${var%pattern} strips pattern from the back or right hand side of the variable. This form is not greedy meaning it stops as soon as the pattern is matched. ${var%%pattern} is the greedy form.
+$ echo ${var%,*}
+a.ads,fssd2342%asd234#@.,&%
+$ echo ${var%%,*}
+a.ads
+${var/pattern/replacement} replaces pattern with replacement once.
+$ echo ${var/a/A}
+A.ads,fssd2342%asd234#@.,&%,sdfgsdfgas4352
+${var//pattern/replacement} replaces pattern with replacement globally.
+$ echo ${var//a/A}
+A.Ads,fssd2342%Asd234#@.,&%,sdfgsdfgAs4352
+${var/#pattern/replacement} if variable beginning matches the pattern it is replaced with replacement.
+$ echo ${var/#a./llll}
+llllads,fssd2342%asd234#@.,&%,sdfgsdfgas4352
+${var/%pattern/replacement} if variable end matches the pattern it is replaced with replacement.
+$ echo ${var/%352/llll}
+a.ads,fssd2342%asd234#@.,&%,sdfgsdfgas4llll

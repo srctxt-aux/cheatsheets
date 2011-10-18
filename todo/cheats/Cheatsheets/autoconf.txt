@@ -1,0 +1,6 @@
+autoconf
+========
+
+Autoconf is a tool for producing shell scripts that automatically configure software source code packages to adapt to many kinds of UNIX-like systems. The configuration scripts produced by Autoconf are independent of it when they are run.
+
+Together with Automake and Libtool, Autoconf forms the GNU build system.

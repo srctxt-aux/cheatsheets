@@ -1,0 +1,381 @@
+<pre><code>                   Reading C Declarations:
+
+                  A Guide for the Mystified
+
+                             by
+
+                         Eric Giguere
+</code></pre>
+
+<p>This text is Copyright (c)1987 by Eric Giguere.  Originally published
+in the (now defunct) Transactor for the Amiga.  Feel free to distribute
+this document for non-commercial purposes.</p>
+
+<p>Introduction</p>
+
+<pre><code> One of the most confusing aspects of the C programming language
+</code></pre>
+
+<p>is the way in which variable types are declared.  These type declarations
+manage to mystify even experienced programmers. This guide is intended
+to help in deciphering those declarations, including the new twists
+introduced by the ANSI Standard.  Several examples are given to
+illustrate the methods, and a short quiz at the end allows you to
+test yourself on a variety of sample declarations.</p>
+
+<p>What is a declaration?</p>
+
+<pre><code> Throughout this guide the word "declaration" will be used
+</code></pre>
+
+<p>to refer to a variable declaration statement.  The following two
+statements are both declarations:</p>
+
+<pre><code>        static int x;
+        register short y = 0;
+</code></pre>
+
+<p>Pre-ANSI Declarations</p>
+
+<pre><code> A C type declaration can be broken into two distinct parts:
+</code></pre>
+
+<p>a "type specifier" and a "declarator".  The type specifier
+is the easy part:  it declares the (optional) storage class (either
+auto, static, register or extern) and a type (such as
+int or unsigned char).  The declarator is the part that
+causes confusion, and specifies whether a variable is to be considered
+a simple type, a pointer, an array, a function, or a combination of
+these.  The identifier, the variable name, is found in the
+middle of the declarator.</p>
+
+<pre><code>The rules we'll use will allow you to follow a declaration
+</code></pre>
+
+<p>by writing a phrase on a piece of paper at each step in the decoding
+process.  The final result will be a phrase "declare variable-name
+as ..." stating in plain English what exactly is being declared.</p>
+
+<p>Rules</p>
+
+<ol>
+<li><p>Find the identifier.  This is your starting point.  On a piece
+of paper, write "declare identifier as".</p></li>
+<li><p>Look to the right.  If there is nothing there, or there is a
+right parenthesis ")", goto step 4.</p></li>
+<li><p>You are now positioned either on an array (left bracket) or
+function (left parenthesis) descriptor.  There may be
+a sequence of these, ending either with an unmatched right
+parenthesis or the end of the declarator (a semicolon or
+a "=" for initialization).  For each such descriptor,
+reading from left to right:</p>
+
+<pre><code>(a) if an empty array "[]", write "array of"
+(b) if an array with a size, write "array size of"
+(c) if a function "()", write "function returning"
+</code></pre>
+
+<p>Stop at the unmatched parenthesis or the end of the declarator,
+whichever comes first.</p></li>
+<li><p>Return to the starting position and look to the left.  If there
+is nothing there, or there is a left parenthesis "(", goto step 6.</p></li>
+<li><p>You are now positioned on a pointer descriptor, "*".  There may
+be a sequence of these to the left, ending either with an
+unmatched left parenthesis "(" or the start of the declarator.
+Reading from right to left, for each pointer descriptor
+write "pointer to".  Stop at the unmatched parenthesis or the
+start of the declarator, whichever is first.</p></li>
+<li><p>At this point you have either a parenthesized expression or the
+complete declarator.  If you have a parenthesized expression,
+consider it as your new starting point and return to step 2.</p></li>
+<li><p>Write down the type specifier.  Stop.</p></li>
+</ol>
+
+<p>Examples</p>
+
+<pre><code> The rules may seem confusing, so let's apply them to a few
+</code></pre>
+
+<p>examples:</p>
+
+<p>Example 1: static int *x;</p>
+
+<p>Our starting point is the identifier x.  We write
+"declare x as".  We look to the right.  Nothing there, goto step 4.
+We have a pointer descriptor, so we goto step 5.  We write
+"pointer to" and stop since we've reached the start of the
+declarator.  At step 6 we see we have the complete declarator, so
+we move to step 7 and write "static int" and stop.</p>
+
+<p>The declaration then reads:  "declare x as pointer to static int".</p>
+
+<p>Example 2: char *argv[];</p>
+
+<p>Step 1, write "declare argv as".  Step 2, array to the right.
+Step 3, write "array of".  Step 4, pointer to the left.  Step 5,
+write "pointer to".  Step 6, complete declaration.  Step 7,
+write "char".  Stop.</p>
+
+<p>The declaration is: "declare argv as array of pointer to char".
+Note that it's NOT a pointer to an array of char.  Array
+descriptors have precedence over pointer descriptors
+and are read first.</p>
+
+<p>Example 3: int (*ptar)[ 10 ];</p>
+
+<p>Step 1, write "declare ptar as".  Step 2, parenthesis on the right,
+goto step 4.  Step 5, write "pointer to".  Step 6, parenthesized
+expression, goto step 2.  Step 3, write "array 10 of".  Step 4,
+start of declarator on the left, goto step 6.  Step 7, write
+"int".  Stop.</p>
+
+<p>The declaration is:  "declare ptar as pointer to array 10 of int".
+Here the parentheses were used to force the pointer descriptor
+to have precendence over the array descriptor.  The array has ten
+elements.</p>
+
+<p>Example 4: int (*fp)();</p>
+
+<p>Step 1, write "declare fp as".  Step 2, parenthesis on the right,
+goto step 4.  Step 5, write "pointer to".  Step 6, parenthesized
+expression, goto step 2.  Step 3, write "function returning".  Step 4,
+start of declarator on the left, goto step 6.  Step 7, write "int".
+Stop.</p>
+
+<p>The declaration is: "declare fp as pointer to function returning int".
+Function and array descriptors have the same precendence, so again
+the parentheses were necessary to force the pointer descriptor to
+be read first.  (Note then that int *fp(); declares fp
+as a function returning pointer to int.)</p>
+
+<p>Example 5: int <em>(</em>list[ MAX ])();</p>
+
+<p>Step 1, the identifier is list (MAX is the array size),
+write "declare list as".  Step 2, array on the right.  Step 3, write
+"array MAX of".  Step 4, pointer on the left.  Step 5, write
+"pointer to".  Step 6, parenthesized expression, goto step 2.  Step 2,
+function on the right.  Step 3, write "function returning".  Step 4,
+pointer on the left.  Step 5, write "pointer to".  Step 6, complete
+declarator.  Step 7, write "int".  Stop.</p>
+
+<p>The declaration is: "declare list as array MAX of pointer to function
+returning pointer to int".  Without the parentheses we would have had
+an array of functions returning pointers to pointers to int, which
+is illegal in C because arrays cannot hold functions.</p>
+
+<p>Example 6: char *table[ 10 ][ 20 ];</p>
+
+<p>Step 1, write "declare table as".  Step 2, array on right.  Step 3,
+write "array 10 of" followed by "array 20 of".  Step 4, pointer on
+the left.  Step 5, write "pointer to".  Step 6, complete declaration.
+Step 7, write "char".  Stop.</p>
+
+<p>The declaration is "declare table as array 10 of array 20 of pointer
+to char".</p>
+
+<pre><code> The important thing to remember while reading these declarations
+</code></pre>
+
+<p>is that functions and arrays are read left-to-right and have precedence
+over pointers, which are read right-to-left.</p>
+
+<p>ANSI Additions</p>
+
+<pre><code> The ANSI Standard for C makes a few changes
+</code></pre>
+
+<p>to what a C type declaration can look like.  The basic structure of
+type specifier and declarator remains the same.  However,
+a function designator may now include both the number and the types
+of parameters the function accepts and pointers may also be modified
+by the keywords const and volatile.</p>
+
+<pre><code> A further addition is the abstract declarator, used
+</code></pre>
+
+<p>to describe function parameters.  An abstract declarator is a declarator
+minus the identifier.  Thus instead of *a[] you could
+conceivably use *[].  This makes it a bit harder to spot the
+correct starting position in the declaration.  Note that abstract
+declarators can only be used in certain situations --- an identifier
+is a necessary part of most declarations.</p>
+
+<pre><code> The rules given in the previous section need to be amended
+</code></pre>
+
+<p>slightly to handle these new additions, but rather than list them we'll
+go through a few examples.</p>
+
+<p>Example 7: int func( char *, int );</p>
+
+<p>Step 1, find the identifier, write "declare func as".  Step 2, notice
+the function descriptor to the right, goto step 3.  Here we make some
+changes.  Write simply "function".  Now shift your attention
+inside the parentheses making up the function descriptor.
+These are the types of parameters that the function expects.  Each
+parameter is a declaration in itself, with a type specifier and an
+abstract declarator.  Put aside the current declaration for now,
+write "(with first parameter of type", and goto step 2 with
+char * as the new starting point:</p>
+
+<pre><code>    Step 2, nothing on the right, goto step 4.  Step 5, write
+    "pointer to".  Step 6, end of declaration.  Step 7, write
+    "char".  Stop.
+</code></pre>
+
+<p>Now go on to the second parameter.  Write "and with second parameter
+of type" and goto step 2 with int as the new starting point:</p>
+
+<pre><code>    Step 2, nothing on the left.  Step 4, nothing on the right.
+    Step 6, end of declaration.  Step 7, write "int".  Stop.
+</code></pre>
+
+<p>There are no more parameters to be dealt with so we continue with
+our original declaration, first writing ") returning" and continue
+where we left off in step 3.  Step 4, no pointers on the left.
+Step 6, end of declaration.  Step 7, write "int".  Stop.</p>
+
+<p>The complete declaration is "declare func as function (with first
+parameter of type pointer to char and with second parameter of
+type int) returning int."</p>
+
+<p>You can (and probably should) ignore the parameters if you wish.
+This would then give us "declare func as function returning int".
+All we are doing when declaring the parameters is adding more
+detail.</p>
+
+<p>Example 8: const int *ptr1;</p>
+
+<p>This case is handled using the old rules to give us "declare ptr1
+as a pointer to const int", where const means the the int
+cannot be modified.</p>
+
+<p>Example 9: int *const ptr2;</p>
+
+<p>This is an example of the new syntax involving const and
+volatile.  Either or both of these two types may be placed
+after a pointer descriptor to assign those attributes to the
+pointer itself.  Back to the rules:  Step 1, start at ptr2,
+the only choice for identifier since const and volatile
+are reserved words in ANSI C, write "declare ptr2 as".  Step 2,
+nothing to the right, goto step 4.  Step 4, we have a "*" followed
+by const.  This qualifies the pointer descriptor.  Step 5,
+write "const pointer to".  Step 6, end of declaration.  Step 7,
+write "int".  Stop.</p>
+
+<p>The declaration is:  "declare ptr2 as const pointer to int".  The
+distinction to make between this declaration and the one in Example 8
+is that the const attribute is associated with the pointer,
+and not the type specifier.  So while the pointer itself cannot be
+modified, the type it points to can.</p>
+
+<p>The volatile type can also be used in this fashion, either
+by itself or in combination with const.  Write it the same
+way.</p>
+
+<p>Pointer descriptors do not require either of these attributes,
+however, so a declaration of the form int **a; is still
+quite valid.</p>
+
+<p>Typing Overload</p>
+
+<pre><code> Obviously, the more information is added to a declaration,
+</code></pre>
+
+<p>the harder it gets to read.</p>
+
+<p>Example 10: extern char <em>const (</em>goop( char *b ))( int, long );</p>
+
+<p>Where do we start?  There are two identifiers in this declaration,
+goop and b.  Notice, however, that char *b is
+declaring a function parameter; goop is our starting point.
+Step 1, write "declare goop as".  Step 2, function on the right.
+Step 3, write "function".  Now look inside the function to find any
+parameters.  Write "(with one parameter of type char *".  Notice
+how we ignore the identifier b.  Function parameters declared
+in function prototypes can be declared with abstract or normal
+declarators; in the latter case the identifier is ignored.
+Only the typing information counts.
+(The identifiers are not ignored in ANSI function
+definitions, but we're declaring a prototype here.)</p>
+
+<p>Now go back to step 3, complete the function and write ") returning".
+Step 4, a pointer to the left of goop.  Step 5, write
+"pointer to".  Step 6, a parenthesized expression, back to step 2.
+Step 2, function on the right.  Step 3, write "function".  Now go
+inside, write "(with first parameter of type int and with second
+parameter of type long)".  End of function, back to step 3 and
+write "returning".  Step 4, pointer (with const) on the left.
+Step 5, write "const pointer to".  Step 6, end of declaration.
+Step 7, write "extern char".  Stop.</p>
+
+<p>The declaration is (take a deep breath):
+"declare goop as function (with one parameter
+of type char *) returning pointer to function (with first parameter
+of type int and second parameter of type long) returning const pointer
+to extern char." (Whew!)</p>
+
+<p>Or if you choose to ignore the parameters:
+"declare goop as function returning pointer to function returning
+const pointer to extern char", which is a bit less intimidating.</p>
+
+<p>Parentheses</p>
+
+<p>One of the harder things to do is to decide what a given set
+of parentheses imply --- are we declaring a function or are
+we simply grouping an expression?  The simplest way to
+differentiate the two is to look at the placement of the type
+specifiers.  If a type specifier immediately follows a left
+parenthesis, that parenthesis is the start of a function
+descriptor and the type is part of a function parameter.
+Empty parentheses also signify a function.  Otherwise
+the parentheses are grouping (perhaps unnecessarily, but it's
+better to have too many than too few) the expression.</p>
+
+<p>The Quiz</p>
+
+<pre><code> After all this work, have we accomplished anything?  You might
+</code></pre>
+
+<p>think that working out those examples step-by-step was overkill.
+Maybe.  But read them over carefully once or twice,
+work through the following examples,
+and you won't ever be confused by a C declaration again.
+Answers can be found below.</p>
+
+<pre><code>(a) char ****q[ 30 ];
+(b) char **(**q)[ 30 ];
+(c) extern int (x)[];
+(d) long (*a[])( char, char );
+(e) int *(*(*(*b)())[10])();
+(f) char *strprt( char (*)( int ), unsigned char );
+(g) int (*const ab[])( unsigned int );
+</code></pre>
+
+<p>Answers</p>
+
+<pre><code>(a) declare q as array 30 of pointer to pointer to pointer to
+    pointer to char
+
+(b) declare q as pointer to pointer to array 30 of pointer to
+    pointer to char
+
+(c) declare x as array of extern int
+
+(d) declare a as array of pointer to function (with two parameters
+    of type char) returning long
+
+(e) declare b as pointer to function returning pointer to array 10 of
+    pointer to function returning pointer to int
+
+(f) declare strprt as function (with first parameter of type pointer
+    to function (with parameter of type int) returning char and with
+    second parameter of type unsigned char) returning pointer to char
+
+(g) declare ab as array of const pointer to function (with parameter
+    of type unsigned int) returning int
+</code></pre>
+
+<hr />
+
+<p>Copyright (c) 1987 by Eric Giguere</p>

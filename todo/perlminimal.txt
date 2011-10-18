@@ -1,0 +1,229 @@
+Cheatsheet Minimal Perl
+=======================
+
+    (C) 2011 Ben, srctxt.org
+    in: cheatsheets, perl
+
+Minimal Perl is coined by a book of dr. tim maher that goes by the same name and means a minimal unixy programming style in Perl.
+
+***
+
+The main reason for me to examine Minimal Perl is to write simple filters that be used in Unix Piping mechanism.
+
+Index
+-----
+
+- most important Perl switches
+- Variables
+- compare maximal to minimal
+- BEGIN and END
+- Examples 
+
+Most important Perl switches
+----------------------------
+
+    -e    Expression
+
+    -w    Warnings
+    -p    Reading and printing from INPUT
+    -n    Reading, but no printing from INPUT, you have to `print` explecetly
+    -l    Line end processing
+
+    -i Edit files in-place
+    -M Use module
+    -a Automatically split input
+    -0 Change input record separator
+
+A cool switch is also -s:
+
+Enables custom switches
+
+#!/usr/bin/perl -s
+$fname or die "usage: $0 -fname=<filename>"
+
+./myprog -fname='boohoo.txt'
+
+Variables
+--------
+    $_   Data Variable: with -n / -p contains read input record
+    $.   Number Variable: Number of read input record
+
+Example ( a 'cat' program):
+
+    perl -wnl -e 'print "$.: $_;"' linux.txt
+
+
+Perl as Grep
+------------
+
+### Just output filenames (grep -l)
+
+like 
+
+    grep -l 'regex' file.txt
+
+print filenames
+
+    
+    perl -wnl -e '/regex/ and print $ARGV and close ARGV;' file.txt
+
+-> as soon as the regex kicks in print the filename, and then close the file, because we don't need it anymore.
+
+in contrast, thist print all the lines:
+
+    perl -wnl -e '/regex/ and print;' file.txt
+
+### Ignore case (grep -i)
+
+
+    perl -wnl -e ' /regex/i and print;' file.txt
+
+
+### Chaining grep filters
+
+    perl -wnl -e '/foo/ and /bar/ and print;' myfiles.txt
+
+
+
+
+What is Minimal Perl
+--------------------
+
+### Compare maximal to minimal
+
+Print contents of file
+
+### Maximal
+
+    #!/usr/bin/perl -w
+
+    foreach my $file (@ARGV){
+        open(my $IN, '<', $file) || die "Error: $! \n";
+        while ( my $line = <$IN> ){
+            if ( $line =~ /hello/ ){
+                print $line; 
+            }
+        }
+        close $IN || die "Error: $! \n";
+    }
+
+### Minimal
+
+    perl -wnl -e '/hello/ && print' linux.txt
+
+
+BEGIN and END
+-------------
+
+Typical scenario:
+
+1. Write a header
+2. Loop through files
+3. Write a footer
+
+    #!/usr/bin/perl -wnl 
+
+    BEGIN {
+        print "This is my HEADER \n";
+    }
+    if (/hello/){
+        print; 
+    }
+
+    END {
+        print "This is my FOOTER \n";
+    }
+
+
+
+Loops
+-----
+
+for(@ARGV){
+    print $OUT $txt;
+
+}
+
+Examples
+---------
+
+### A sed command
+
+!! Use -wpl and NEVER -wnl with -i ( wipes file)
+
+    perl -wpl -i -e 's/foo/bar/g' file.txt
+
+### Regular expressions
+
+    echo 'foo bar' | perl -nle 'm/.*(foo).*/; print "$1"'
+
+### loop through files
+
+#### With the -n switch
+
+`ls *.txt | perl -ne 'print "hi $_"'`
+or 
+`perl -ne 'print "hi $_"' *.txt`
+
+results in :
+
+    hi file1
+    hi file2
+    hi file3
+    ...
+
+
+#### With the -p switch
+
+`ls *.txt | perl -pe 'print "hi $_"'`
+or 
+`perl -pe 'print "hi $_"' *.txt`
+
+results in :
+
+    hi file1
+    file1
+    hi file2
+    file2
+    hi file3
+    file3
+    ...
+
+### Search and replace
+
+! It is important to use the -p switch (with -n its possible to overwrite a file)
+
+`perl -i -p -e 's/oldstring/newstring/g' *.txt`
+or
+`ls *.txt | xargs perl -pi -e 's/oldstring/newstring/g'`
+or
+`find . -iname '*.txt' | xargs perl -pi -e 's/oldstring/newstring/g'`
+
+replace all occurences in .txt files
+
+Examples
+--------
+
+### Extract a substring
+
+    echo '#!/usr/bin/perl' | perl -wpl -e 's/.*\/(\w*)$/$1/g'
+
+perl
+
+
+
+Perl Loop through Files
+------------------------
+
+
+Defaul file name and current line
+
+    #!/usr/bin/perl -wnl
+    print "$ARGV: $_ ";
+
+### Print a regex
+
+    #!/usr/bin/perl -wnl
+    /reg(ex)/ print "$1";
+
+

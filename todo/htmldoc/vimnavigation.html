@@ -1,0 +1,147 @@
+<h1>Vim Navigation</h1>
+
+<pre><code>Copyright (C) 2011 Ben
+2011-06-22 / srctxt.org
+tag,
+</code></pre>
+
+<hr />
+
+<p>8 Essential Vim Editor Navigation Fundamentals</p>
+
+<p>by Ramesh Natarajan on March 6, 2009
+Vim Vi Editor Navigation Fundamentals
+Photo courtesy of Håkan Dahlström</p>
+
+<p>This article is written by SathiyaMoorthy.</p>
+
+<p>This article is part of the ongoing Vi / Vim Tips and Tricks series. Navigation is a vital part of text editing. To be very productive, you should be aware of all possible navigation shortcuts in your editor. In this article, let us review the following 8 Vi / Vim navigation options.</p>
+
+<pre><code>Line navigation
+Screen navigation
+Word navigation
+Special navigation
+Paragraph navigation
+Search navigation
+Code navigation
+Navigation from command line
+</code></pre>
+
+<ol>
+<li>Vim Line Navigation</li>
+</ol>
+
+<p>Following are the four navigation that can be done line by line.</p>
+
+<pre><code>k – navigate upwards
+j – navigate downwards
+l – navigate right side
+h – navigate left side
+</code></pre>
+
+<p>By using the repeat factor in VIM we can do this operation for N times. For example, when you want to
+go down by 10 lines, then type “10j”.</p>
+
+<p>Within a line if you want to navigate to different position, you have 4 other options.</p>
+
+<pre><code>0 – go to the starting of the current line.
+^ – go to the first non blank character of the line.
+$ – go to the end of the current line.
+g_ – go to the last non blank character of the line.
+</code></pre>
+
+<ol>
+<li>Vim Screen Navigation</li>
+</ol>
+
+<p>Following are the three navigation which can be done in relation to text shown in the screen.</p>
+
+<pre><code>H – Go to the first line of current screen.
+M – Go to the middle line of current screen.
+L – Go to the last line of current screen.
+ctrl+f – Jump forward one full screen.
+ctrl+b – Jump backwards one full screen
+ctrl+d – Jump forward (down) a half screen
+ctrl+u – Jump back (up) one half screen
+</code></pre>
+
+<ol>
+<li>Vim Special Navigation</li>
+</ol>
+
+<p>You may want to do some special navigation inside a file, which are:</p>
+
+<pre><code>N% – Go to the Nth percentage line of the file.
+NG – Go to the Nth line of the file.
+G – Go to the end of the file.
+`” – Go to the position where you were in NORMAL MODE while last closing the file.
+`^ – Go to the position where you were in INSERT MODE while last closing the file.
+g – Go to the beginning of the file.
+</code></pre>
+
+<ol>
+<li>Vim Word Navigation</li>
+</ol>
+
+<p>You may want to do several navigation in relation to the words, such as:</p>
+
+<pre><code>e – go to the end of the current word.
+E – go to the end of the current WORD.
+b – go to the previous (before) word.
+B – go to the previous (before) WORD.
+w – go to the next word.
+W – go to the next WORD.
+</code></pre>
+
+<p>WORD – WORD consists of a sequence of non-blank characters, separated with white space.
+word – word consists of a sequence of letters, digits and underscores.</p>
+
+<p>Example to show the difference between WORD and word</p>
+
+<pre><code>192.168.1.1 – single WORD
+192.168.1.1 – seven words.
+</code></pre>
+
+<ol>
+<li><p>Vim Paragraph Navigation</p>
+
+<p>{ – Go to the beginning of the current paragraph. By pressing { again and again move to the previous paragraph beginnings.
+} – Go to the end of the current paragraph. By pressing } again and again move to the next paragraph end, and again.</p></li>
+<li><p>Vim Search Navigation</p>
+
+<p>/i – Search for a pattern which will you take you to the next occurrence of it.
+?i – Search for a pattern which will you take you to the previous occurrence of it.</p>
+
+<ul>
+<li><ul>
+<li>Go to the next occurrence of the current word under the cursor.
+<h1>- Go to the previous occurrence of the current word under the cursor.</h1></li>
+</ul></li>
+</ul></li>
+<li><p>Vim Code Navigation</p></li>
+</ol>
+
+<p>% – Go to the matching braces, or parenthesis inside code.
+8. Vim Navigation from Command Line</p>
+
+<p>Vim +N filename: Go to the Nth line of the file after opening it.</p>
+
+<p>vim +10 /etc/passwd</p>
+
+<p>Vim +/pattern filename: Go to the particular pattern’s line inside the file, first occurrence from first. In the following example, it will open the README file and jump to the first occurrence of the word “install”.</p>
+
+<p>vim +/install README</p>
+
+<ul>
+<li><p>ctrl+f – Jump forward one full screen.</p></li>
+<li><p>ctrl+b – Jump backwards one full screen</p></li>
+<li><p>ctrl+d – Jump forward (down) a half screen</p></li>
+<li><p>ctrl+u – Jump back (up) one half screen</p></li>
+<li><p>Vim Special Navigation</p></li>
+</ul>
+
+<p>. . .</p>
+
+<ul>
+<li>g – Go to the beginning of the file.</li>
+</ul>

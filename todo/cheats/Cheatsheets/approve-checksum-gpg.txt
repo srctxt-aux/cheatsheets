@@ -1,0 +1,65 @@
+Title:  Approve checksums with gpg
+Author: har lekin
+Date:   November 20, 2009
+Keywords: howto, gpg
+
+
+Introduction 
+-----------
+GnuPG is the GNU project's complete and free implementation of the OpenPGP standard as defined by RFC4880. Amongst other things we use it to approve checksums http://www.gnupg.org/
+
+	
+2. Get the Keys 
+---------------
+
+### a. Download the File and the Keyfile ### 
+The simplest thing is to show it with an example
+Get the apache and its gpg key of 
+
+	mkdir -p /usr/local/src && cd /usr/local/src 
+	wget http://archive.apache.org/dist/httpd/httpd-2.2.2.tar.bz2
+	wget http://archive.apache.org/dist/httpd/httpd-2.2.2.tar.bz2.asc
+	
+### b. Check the Keyfile and Get the 'key ID' ###
+
+	$ gpg httpd-2.2.2.tar.bz2.asc
+	gpg: Signature made Fri Apr 21 20:59:05 2006 PDT using DSA key ID 31748H00
+	gpg: Can't check signature: public key not found
+
+The key ID is 31748H00 you use it for generate the public key
+
+### c. Get the public key ### 
+
+	$ gpg --keyserver pgpkeys.mit.edu --recv-key 31748H00
+	gpg: requesting key 31748H00 from hkp server pgpkeys.mit.edu
+	...
+	gpg: Total number processed: 1
+	gpg:               imported: 1
+	
+
+Print out a list of installed keys	
+	gpg --list-keys
+	
+Print out your fingerprint
+
+	gpg --fingerprint 31748H00 
+	pub   1024D/31748H00 2004-01-17
+      	Key fingerprint = 39F6 691A 0ECF 0C50 E8CB  849C F788 75F4 4272 1F00
+		uid                  Paul Querna <chip@force-elite.com>
+		...
+		sub   2048g/7A2BE310 2004-01-17
+
+
+### 3. Test GPG ###
+Veryfy the downloaded file
+
+	$ gpg --verify httpd-2.2.2.tar.bz2.asc  httpd-2.2.2.tar.bz2
+	  gpg: Signature made Fri Apr 21 20:59:05 2006 PDT using DSA key ID 42721F00
+	  gpg: Good signature from "Paul Querna <chip@force-elite.com>"
+	  gpg:                 aka "Paul Querna <chip@cyan.com>"
+	  ...
+	  gpg: WARNING: This key is not certified with a trusted signature!
+	  Primary key fingerprint: 39F6 691A 0ECF 0C50 E8BB  849C F788 75F6 4272 1F00
+
+So we have verified that the downloaded software has a valid signature, i.e. it has not been altered or modified after this signature has been made. However, we still do not know who has created this signature. It is your own decision whether you trust a key or no
+

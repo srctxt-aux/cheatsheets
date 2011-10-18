@@ -1,0 +1,58 @@
+#   Cheatsheet Perl Tools   #
+
+    (C) 2010 Ben, leakin.org
+    16-11-2010, cheatsheets
+
+Some of the most important tools of Perl and its commands.
+
+***
+
+
+Cpanplus
+--------
+
+- search module: `cpanp -m perlcritic`
+
+- install module: `cpanp -i Perl::Critic`
+
+
+from http://search.cpan.org/~bingos/CPANPLUS/bin/cpanp :
+
+    h                   # help information
+    v                   # version information
+
+    a AUTHOR ...        # search by author(s)
+    m MODULE ...        # search by module(s)
+    f MODULE ...        # list all releases of a module
+
+    i MODULE ...        # install module(s)
+    t MODULE ...        # test module(s)
+    u MODULE ...        # uninstall module(s)
+    d MODULE ...        # download module(s)
+    l MODULE ...        # display detailed information about module(s)
+    r MODULE ...        # display README files of module(s)
+    c MODULE ...        # check for module report(s) from cpan-testers
+    z MODULE ...        # extract module(s) and open command prompt in it
+
+    x                   # reload CPAN indices
+
+    o [ MODULE ... ]    # list installed module(s) that aren't up to date
+    b                   # write a bundle file for your configuration
+
+
+
+
+Cpanminus
+---------
+
+
+Perlcritic
+---------
+
+
+Perl::Tidy
+----------
+
+
+Pod::Tidy
+--------

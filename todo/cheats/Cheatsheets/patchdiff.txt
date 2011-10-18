@@ -1,0 +1,33 @@
+Cheatsheet Patch and Diff
+=========================
+
+   (C) 2011 Ben, srctxt.org
+   cheatsheets, patch, diff
+
+Writing and applying software patches with patch and diff.
+
+***
+
+Apply a patch with `patch`
+--------------------------
+
+### single file
+
+   patch < foo.patch
+
+the targed file should be defined in the *.patch file. If not, then specify it:
+
+   patch bar.txt < foo.patch
+
+The following usage is most commonly used:
+$ patch -p1 < {/path/to/patch/file}
+
+To apply a patch, one could run the following command in a shell:
+$ patch < /path/to/file
+
+Patches can be undone, or reversed, with the '-R' option:
+$ patch -R < /path/to/file
+
+Above 3 are basic usage read the man page of patch command for more information and usage:
+% man patch
+

@@ -1,0 +1,35 @@
+#   GnuScreen Cheatsheet   #
+
+    (C) 2010 Ben, leakin.org
+    10-11-2010, cheatsheets
+
+et
+
+
+
+
+
+
+nu Screen is a simple command line (cli) window manager.
+
+***
+
+
+Window management
+----------------
+
+### One Window:
+close all window and display one big screen
+
+    ctrl-a Q
+
+### Name Windows
+
+    ctrl-a A
+
+### view the same screen from a different login
+
+    screen -x
+
+
+

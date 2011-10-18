@@ -1,0 +1,59 @@
+====== Basic Workflow and Collaboration with Git and SVN ======
+					
+	system:	nixen		
+	by:		ben@jakbot, 09. July 2008		
+
+
+==== Introduction ====
+
+Here's the thing: Git is pretty cool and gives you more freedom when working with your local copy. But you have all those sources somewhere on a server with svn. No Git there. 
+
+===== Checkout an Existing SVN repository =====
+
+	you have your sources on a server with the following URL:
+	
+	http://code.myserver.com/svn/repo
+	
+	
+	
+===== 2. checkout with git-svn =====
+
+	git-svn clone http://code.jakbot.com/svn/repo . --username=svnuser
+		
+		
+===== 3. Work with the code =====
+
+make local changes
+
+	touch trunk/testfile.txt
+	git add trunk/testfile.txt # or git add .
+	git commit  -m "fuck yeah"
+
+
+===== 5. Updates and Checkin =====	
+
+holidays yay...
+...
+holidays over...
+
+	git rebase # checkout latest changes from svn repo
+	touch trunk/testfile3.txt
+	git add trunk/testfile.txt # or git add .
+	git commit  -m "fuck no"
+	
+check in svn repository
+	git svn dcommit  # yeah dcommit not commit
+	
+	
+===== remove folders =====
+
+	git rm -r folder/ && git commit && git svn dcommit --rmdir
+	
+	
+
+
+
+
+	
+
+

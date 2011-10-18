@@ -1,0 +1,50 @@
+Sed Cheatsheet
+==============
+
+        (C) 2011 Ben, srctxt
+        cheatsheet, sed
+
+How to use sed for simple search & replace tasks
+
+***
+
+deleting lines
+---------------
+
+### delete/remove lines that contain
+        sed '/<deleteLinesWithThis>/d'
+
+### delete/remove lines that don't contain
+        sed '/<deleteLinesWithoutThis>/!d'
+
+line spacing blank lines
+------------------------
+
+### insert/add a blank line between each line
+        sed G
+
+### insert/add a blank line above every matching lines
+        sed '/<BlankLineAboveThis>/{x;p;x;}'
+
+### insert/add a blank line below every matching lines
+        sed '/<BlankLineBelowThis>/G'
+
+### insert/add a blank line above and below every matching lines
+        sed '/<BlankLineAbove&BelowThis>/{x;p;x;G;}'
+
+### remove/delete empty lines
+        sed '/^$/d'
+
+### remove/delete blank lines (which contains only spaces or tabs)
+        sed '/^[ \t]*$/d'
+
+### remove/delete all blank lines at top of file
+        sed '/./,$!d'
+
+### remove/delete all blank lines at end of file
+        sed -e :a -e '/^
+        *$/{$d;N;ba' -e '}'
+
+
+
+

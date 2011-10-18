@@ -1,0 +1,36 @@
+Build OpenSSL on Mac OS X
+=========================
+
+    installing openssl-0.9.8g on Mac OS X, 10.5.4 (Leopard)
+	by ben@jakb.org, 10.fev.2009		
+
+
+Introduction
+------------
+Amongst others you need openssl in order to build subversion
+
+1. Installing OpenSSL 
+---------------------
+	cd /usr/local/src
+	wget http://www.openssl.org/source/openssl-0.9.8g.tar.gz
+	tar xfz openssl-0.9.8g.tar.gz && cd openssl-0.9.8g
+	sudo mv /usr/lib/libcrypto.0.9.dylib /usr/lib/libcrypto.0.9.dylib.save
+	sudo mv /usr/lib/libssl.0.9.dylib /usr/lib/libssl.0.9.dylib.save
+	config -
+2. Prepare the Makefile
+
+change the following lines in the file //apps/Makefile//:
+
+	LIBCRYPTO=-L.. -lcrypto
+	LIBSSL=-L.. -lssl
+
+to:
+
+	LIBCRYPTO=../libcrypto.a
+	LIBSSL=../libssl.a
+
+==== 3. Build it ====
+
+	sudo make install
+	sudo mv /usr/lib/libcrypto.0.9.dylib.save /usr/lib/libcrypto.0.9.dylib 
+	sudo mv /usr/lib/libssl.0.9.dylib.save /usr/lib/libssl.0.9.dylib

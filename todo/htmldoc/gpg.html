@@ -1,0 +1,48 @@
+<h1>GPG Cheatsheet</h1>
+
+<pre><code>by: Ben, srctxt.org
+in: cheatsheets, file-encryption, gpg, gnupg
+</code></pre>
+
+<p><em>How to encrypt and decrypt files and how to handle keys.</em></p>
+
+<hr />
+
+<h2>Basic operations</h2>
+
+<h3>Encrypt a file with a keyfile</h3>
+
+<pre><code>gpg -e -r "ben srctxt" filename
+</code></pre>
+
+<h3>Encrypt a file with a password</h3>
+
+<pre><code>gpg -c filename
+</code></pre>
+
+<h3>decrypt</h3>
+
+<pre><code>gpg filename.gpg
+</code></pre>
+
+<h2>Working with keyfiles</h2>
+
+<p>Better method, hence more secure.
+Don't loose your keyfiles.</p>
+
+<h3>Create a key</h3>
+
+<pre><code>gpg --gen-key
+</code></pre>
+
+<p>Take the defaults and give a keyfile password.</p>
+
+<h3>List private keys</h3>
+
+<pre><code>gpg --list-secret-keys
+</code></pre>
+
+<h3>List public keys</h3>
+
+<pre><code>gpg --list-keys
+</code></pre>

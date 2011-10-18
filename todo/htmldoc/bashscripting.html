@@ -1,0 +1,47 @@
+<h1>Cheatsheet Bashscripting</h1>
+
+<pre><code>by: ben, srctxt.org
+in: cheatsheets, bash
+</code></pre>
+
+<p><em>Common operations for cli scripts.</em></p>
+
+<hr />
+
+<h2>Utility Functions</h2>
+
+<p>Meet die() and usage()</p>
+
+<h3>Die</h3>
+
+<pre><code>die(){
+    echo &gt;&amp;2 "$@"
+    exit 1
+}
+</code></pre>
+
+<h3>Usage</h3>
+
+<pre><code>usage(){
+    die "Usage: $1"
+}
+</code></pre>
+
+<h2>Check Arguments</h2>
+
+<p>Accept excactly one argument</p>
+
+<pre><code>[ $# = 1 ] || usage "&lt;argument&gt;"
+</code></pre>
+
+<h2>Exit Codes</h2>
+
+<h3>Good Exit</h3>
+
+<pre><code>exit 0
+</code></pre>
+
+<h3>Bad Exit</h3>
+
+<pre><code>exit 1
+</code></pre>

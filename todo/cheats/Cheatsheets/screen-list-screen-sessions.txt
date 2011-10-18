@@ -1,0 +1,13 @@
+#   List screen sessions  #
+    ____________________________
+
+    Copyright (C) 2010 Ben
+
+    13-06-2010, leaking.org
+    notes / gnuscreen / commands
+    ____________________________
+
+
+How can all gnu screen sessions be listed?
+
+    screen -list

@@ -1,0 +1,94 @@
+Bash cheatsheet
+============================
+
+     Copyright (c) Ben, srctxt.org
+     dates: 3.03.2011/3.08.2011
+     tags: cheatsheets, bash
+
+***
+
+#toc ## Contents ##
+
+[ Redirection ](#rd)  
+[Grouping Command](#grp)  
+[Subshell](#sub)  
+[Arithmetics](#ar)  
+[for loops](#for)  
+[Piping with while loops](#while)  
+[If elif else](#ifelse)  
+[Case Statements](#case)  
+[Functions](#func)  
+[The set command](#set)  
+[Test Operators](#ops)  
+
+***
+
+
+#rd ## Redirection ##
+
+Standard, Error output
+
+#grp ## Grouping Commands ##
+
+This doesn't create a new process.
+
+Grouping commands for 
+    { CMDS; } 
+
+    { 
+      CMDS
+     }
+convenience:
+
+    { 
+        echo "Hello"
+        echo "-----"
+        echo " bye"
+    } > myfile.txt
+or to pipe stuff:
+    { echo "Hello" && echo "-----" && echo " bye"; } | while read a ; do echo "x $a"; done
+
+[top](#toc)
+
+#sub ## Subshell ##
+
+Comes handy when running the script with
+     set -e
+For example a non-matching 'grep' could tear the whole script down.
+Something line a try-finally
+This would break the script
+     grep -li xxxx .
+     echo "the script is gone"
+
+[top](#toc)
+
+#ar ## Arithmetics ##
+
+#for ## for loops ##
+
+#while ## Piping with while loops ##
+
+#ifelse ## If elif else ##
+On one line
+
+#case ## Case Statements ##
+
+#func ## Functions ##
+No 'function' keyword in dash
+
+#set ## The set command ##
+Read commands without executing them. This command is useful for syntax checking. 
+    Exit immediately if any simple command gives an error. 
+Print each line of script as it is executed. 
+    Display each command expansion as it is executed. 
+
+#ops ## Test Operators ##
+
+    -f file
+    -d directory
+    -e exists
+    -h symbolic link (also -L)
+    -r readable
+    -w writable
+
+[top](#toc)

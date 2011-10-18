@@ -1,0 +1,14 @@
+Date Cheatsheet
+===============
+The date command and its formats
+
+    (c) 2011 Ben <b@srctxt.org>
+    cheatsheets, date
+***
+
+date +"%d-%m-%Y"
+
+    12-01-2011
+
+
+

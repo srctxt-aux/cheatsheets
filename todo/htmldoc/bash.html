@@ -1,0 +1,101 @@
+<h1>Bash cheatsheet</h1>
+
+<pre><code> Copyright (c) Ben, srctxt.org
+ dates: 3.03.2011/3.08.2011
+ tags: cheatsheets, bash
+</code></pre>
+
+<hr />
+
+<h1>toc ## Contents</h1>
+
+<p><a href="#rd"> Redirection </a> <br />
+<a href="#grp">Grouping Command</a> <br />
+<a href="#sub">Subshell</a> <br />
+<a href="#ar">Arithmetics</a> <br />
+<a href="#for">for loops</a> <br />
+<a href="#while">Piping with while loops</a> <br />
+<a href="#ifelse">If elif else</a> <br />
+<a href="#case">Case Statements</a> <br />
+<a href="#func">Functions</a> <br />
+<a href="#set">The set command</a> <br />
+<a href="#ops">Test Operators</a>  </p>
+
+<hr />
+
+<h1>rd ## Redirection</h1>
+
+<p>Standard, Error output</p>
+
+<h1>grp ## Grouping Commands</h1>
+
+<p>This doesn't create a new process.</p>
+
+<p>Grouping commands for 
+    { CMDS; } </p>
+
+<pre><code>{ 
+  CMDS
+ }
+</code></pre>
+
+<p>convenience:</p>
+
+<pre><code>{ 
+    echo "Hello"
+    echo "-----"
+    echo " bye"
+} &gt; myfile.txt
+</code></pre>
+
+<p>or to pipe stuff:
+    { echo "Hello" &amp;&amp; echo "-----" &amp;&amp; echo " bye"; } | while read a ; do echo "x $a"; done</p>
+
+<p><a href="#toc">top</a></p>
+
+<h1>sub ## Subshell</h1>
+
+<p>Comes handy when running the script with
+     set -e
+For example a non-matching 'grep' could tear the whole script down.
+Something line a try-finally
+This would break the script
+     grep -li xxxx .
+     echo "the script is gone"</p>
+
+<p><a href="#toc">top</a></p>
+
+<h1>ar ## Arithmetics</h1>
+
+<h1>for ## for loops</h1>
+
+<h1>while ## Piping with while loops</h1>
+
+<h1>ifelse ## If elif else</h1>
+
+<p>On one line</p>
+
+<h1>case ## Case Statements</h1>
+
+<h1>func ## Functions</h1>
+
+<p>No 'function' keyword in dash</p>
+
+<h1>set ## The set command</h1>
+
+<p>Read commands without executing them. This command is useful for syntax checking. 
+    Exit immediately if any simple command gives an error. 
+Print each line of script as it is executed. 
+    Display each command expansion as it is executed. </p>
+
+<h1>ops ## Test Operators</h1>
+
+<pre><code>-f file
+-d directory
+-e exists
+-h symbolic link (also -L)
+-r readable
+-w writable
+</code></pre>
+
+<p><a href="#toc">top</a></p>

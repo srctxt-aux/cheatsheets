@@ -1,0 +1,12 @@
+Modify files with find and xargs
+================================
+
+    2010-10-06, Ben <ben@leakin.org>
+    tags:files, find, xargs 
+
+----------------
+
+Passes all filenames (collectively) to xargs
+To output a null character after each filename and tells xargs to break up names based on null characters instead of whitespace or other tokens.
+
+    find . -name mylog-*.log -print0 | xargs -0 rm

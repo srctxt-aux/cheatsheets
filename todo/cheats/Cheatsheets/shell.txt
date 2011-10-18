@@ -1,0 +1,108 @@
+Cheatsheet Shell
+================
+
+    (C) 2010-2011 Ben, srctxt.org
+    cheatsheets, shell, pipes
+
+Unix pipes for bash and some common commands
+
+***
+
+
+The pipe mechanism lets you do amazing stuff:
+
+1. print multiline text and a footer text in an anonymous block
+
+3. Pipe it to a command
+
+4. Pipe it to a loop
+
+
+### Commands
+
+while read
+
+xargs
+
+
+### 1. Print multiline text
+
+    { # anonymous block
+        cat <<\EOF       # multiline trick
+hello you
+have a nice holiday
+EOF
+    cat ./footer.txt
+    } | 
+    grep 'h' |
+    while read word     # loop line per line
+        do
+            echo "word: $word"
+    done
+        
+        }
+
+    
+
+
+
+#   Shell Tools   #
+
+    (C) 2010 Ben, leakin.org
+    03-11-2010, cheatsheets
+
+Some of the most important unix tools
+
+***
+
+
+* test (builtin)
+    -z, -n
+
+
+* rm 
+
+* tr
+
+* cut
+
+* sort
+
+* sed 
+    -e
+
+* cat
+
+* expr
+
+* echo
+
+* printf
+
+* uniq
+
+
+
+#   Bash Test Operators    #
+
+    (C) 2010 Ben, leakin.org
+    04-11-2010, cheatsheets
+
+Bash test operator for testing files, variables, etc.
+
+***
+
+
+* -n: operant non zero
+* -z: operant is zero length
+* -d: is directory
+* -f: is file
+* =: equal strings
+* != / -neq: not equal integers or strings
+* -eq: equal integers
+* -lt: integer is less then 
+* -le: integer is less or equal
+* -gt: integer is greater then
+* -ge: integer is greater or equal
+
+

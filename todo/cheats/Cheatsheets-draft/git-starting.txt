@@ -1,0 +1,10 @@
+
+
+Say you're working on a game called bongo, and you've just been keeping it in ~/bongo. Do this:
+
+
+# Go to the bongo directory
+$ cd ~/bongo
+
+# Import bongo
+$ git init

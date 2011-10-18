@@ -1,0 +1,39 @@
+Cheatsheet for Apache
+=====================
+
+    Copyright (C) 2010 Ben Leak
+    created 2010-06-14, see <leakin.org>
+    cheatsheets, apache
+
+---------------------
+
+
+The default setting for this document is Apache 2 on Ubuntu
+
+
+Start and Stop Apache
+---------------------
+
+    /etc/init.d/apache2
+
+    start|stop|restart|
+    reload|force-reload|start-htcacheclean|stop-htcacheclean|status
+
+Installation
+------------
+
+    sudo apt-get install apache2 apache2-doc apache2-utils
+
+Monitoring
+----------
+
+Is apache running
+
+    ps ax | grep -i apache
+
+    ps ax | grep -i httpd
+
+Apache status:
+
+    /etc/init.d/apache2 status
+

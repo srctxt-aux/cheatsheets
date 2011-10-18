@@ -1,0 +1,15 @@
+leopard
+=========
+
+
+Flush your DNS Cache in Leopard
+
+dscacheutil -flushcache
+
+
+dns flush
+---------
+With Mac OS X <= 10.4 :
+macvin:~ root# lookupd -flushcache
+With Mac OS X > 10.5 :
+macvin:~ root# dscacheutil -flushcache

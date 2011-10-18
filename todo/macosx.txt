@@ -1,0 +1,19 @@
+Mac os x Cheatsheet
+===================
+
+    by: Ben, srctxt.org
+    in: cheatsheets, macosx-cli, macosx
+
+_Some mac specific system commands_
+
+****
+
+Networking
+----------
+
+### Change hostname
+
+    sudo scutil --set Hostname superhost.com
+
+
+

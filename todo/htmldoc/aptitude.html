@@ -1,0 +1,191 @@
+<h1>Aptitude Cheatsheet</h1>
+
+<pre><code>by: Ben, srctxt.org
+in: cheatsheets, package-management, aptitude, apt, dpkg
+</code></pre>
+
+<p><em>Managing packages on ubuntu and debian platforms.</em></p>
+
+<hr />
+
+<p>remove a list of packages of <pattern></p>
+
+<pre><code>sudo apt-get purge `dpkg --get-selections | grep mono | awk '{ print $1 }' `
+</code></pre>
+
+<p>install </p>
+
+<pre><code>sudo dpkg -i mypackage.deb
+</code></pre>
+
+<p>list installed</p>
+
+<pre><code>dpkg --get-selections
+</code></pre>
+
+<p>show install location </p>
+
+<pre><code>dpkg -l php5-gd
+</code></pre>
+
+<p>show infos about library</p>
+
+<pre><code>dpkg -s libglib-2.0.0
+</code></pre>
+
+<p>Which programs use this library</p>
+
+<pre><code>apt-cache rdepends libglib2.0-0
+</code></pre>
+
+<p>to install a package:</p>
+
+<h1>apt-get install NameOfPackage</h1>
+
+<p>to reinstall a package</p>
+
+<h1>apt-get install --reinstall NameOfPackage</h1>
+
+<p>To test the remove command first, use:</p>
+
+<h1>apt-get remove tuxpaint —dry-run</h1>
+
+<p>to remove a package:</p>
+
+<h1>apt-get remove NameOfPackage</h1>
+
+<p>To remove several packages, use a space-delimited list:</p>
+
+<h1>apt-get remove tuxkart gltron frozen-bubble tuxracer nethack galaga</h1>
+
+<p>to remove a package and configuration file:</p>
+
+<h1>apt-get --purge remove NameOfPackage</h1>
+
+<p>to search for a package:</p>
+
+<h1>apt-cache search NameOfPackage</h1>
+
+<p>to update the repository (list of avalible .deb's):</p>
+
+<h1>apt-get update</h1>
+
+<p>to upgrade your system (can be useful in maintaining an up-to-date system):</p>
+
+<h1>apt-get upgrade</h1>
+
+<p>to upgrade your distribution (tries to choose packages needed to upgrade your dist):</p>
+
+<h1>apt-get dist-upgrade</h1>
+
+<p>to enable smart-tab completion, add the line
+source /etc/bash_completion
+to your .bashrc file. When you enter a command like "apt-get install a<tab>," bash will auto-complete the entry.
+to see a short list of common commands:</p>
+
+<h1>apt-get --help</h1>
+
+<p>About package management on Ubuntu and Debian distributions</p>
+
+<h2>APT = Advanced Package Tool</h2>
+
+<h3>dpkg: is the debian packaging tool</h3>
+
+<ul>
+<li>install query and uninstall packages (.deb files)</li>
+<li>Frontend:
+output from 'dpkg -l' (see below)</li>
+</ul>
+
+<p>~~~~
+    ii = package is installed
+    rc = package is (r)emoved, but the (c)onfig files are still there
+        = no status, means no error
+~~~~</p>
+
+<p>apt-get: installing packages over internet. The sources are defined in the file: /etc/apt/sources.list</p>
+
+<p>aptitude: text-gui for apt
+synaptic: gui for apt</p>
+
+<h2>Infos about package</h2>
+
+<p>~~~~
+aptitude show <package>
+~~~~</p>
+
+<h2>Search packages</h2>
+
+<h3>List installed packages:</h3>
+
+<p>~~~~
+dpkg -l
+~~~~</p>
+
+<h3>List individual package:</h3>
+
+<p>~~~~
+dpkg -l mypackage
+~~~~</p>
+
+<h3>Show installed files</h3>
+
+<p>~~~~
+dpkg -L mypackage
+~~~~</p>
+
+<h3>Filter installed packages:</h3>
+
+<p>~~~~
+dpkg -l | grep -i 'mypack'
+~~~~</p>
+
+<h2>Install and remove packages</h2>
+
+<h3>Install package</h3>
+
+<p>~~~~
+apt-get install mypackage
+~~~~</p>
+
+<h3>Remove package</h3>
+
+<p>~~~~
+apt-get remove mypackage
+~~~~</p>
+
+<p>also remove config files:</p>
+
+<p>~~~~
+apt-get --purge mypackage 
+~~~~</p>
+
+<p>remove all config files that are left over from a package:</p>
+
+<p>~~~~
+dpkg -l '<em>php</em>' | grep ^rc | awk '{print $2}' | xargs sudo dpkg -- 
+purge remove
+~~~~</p>
+
+<h2>Update package</h2>
+
+<p>Upgrade individual package:</p>
+
+<p>~~~~
+apt-get update mypackage
+~~~~</p>
+
+<p>Display available updates:</p>
+
+<p>~~~~
+||/ Name           Version        Description
++++- === ==-=== === === === === === === === === === === === === === ==
+ii  adduser        3.63           Add and remove users and groups
+rc  analog         5.32-14        analyzes logfiles from web servers</p>
+
+<ol>
+<li>ii = package is installed</li>
+<li>rc = package is (r)emoved, but the (c)onfig files are still there</li>
+<li>= no status, means no error
+~~~~</li>
+</ol>

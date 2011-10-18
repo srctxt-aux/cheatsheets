@@ -1,0 +1,19 @@
+Title
+=====
+
+    Copyright (C) 2011 Ben
+    2011-09-16 / srctxt.org
+    tag,
+
+Abstract
+
+---
+
+
+
+extract substring
+
+echo SUPER=val | sed 's/SUPER=\(.*\)/\1/g'
+
+returns:
+val

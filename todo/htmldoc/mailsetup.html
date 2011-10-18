@@ -1,0 +1,44 @@
+<h1>Cheatsheet Mailsetup</h1>
+
+<pre><code>by: ben, srctxt.org
+in: cheatsheets, mail, mutt, getmail
+</code></pre>
+
+<p><em>Setup email with getmail and mutt.</em></p>
+
+<hr />
+
+<p>Index:</p>
+
+<p>[[Send Email]]
+[[Get Email]]</p>
+
+<h2>Send Email</h2>
+
+<p>The most easy way to send email over an smtp relay on a simple non-server machine is sendemail (!sendmail). Perl script, No modules:</p>
+
+<p>download: http://caspian.dotconf.net/menu/Software/SendEmail/</p>
+
+<h2>Get Email</h2>
+
+<p>Setup getmail:</p>
+
+<pre><code>~/.getmail
+getmailrc
+gmailrc
+
+
+[retriever]
+type = SimplePOP3SSLRetriever
+server = pop.gmail.com
+username = bensrctxt@gmail.com
+password = terminal3
+
+[destination]
+type = Maildir
+path = ~/maildir/Gmail/
+
+[options]
+verbose = 2
+message_log = ~/maildir/Logs/gmail.log
+</code></pre>

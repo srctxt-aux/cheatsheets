@@ -1,0 +1,34 @@
+Perl Cheatsheet
+===============
+
+
+Open and read files
+-------------------
+
+I prefere the 3 arg version with parens for safe error reporting.
+
+	my $fn = "/etc/hosts";
+	open(my $fh,'<', $fn) or die("Error: Could not open $fn - $! \n");
+
+Read into array
+	
+	my @lines = <$fh>;
+	close($fh) or die("Error: Could not close $fn - $!.\n");
+	foreach my $ln (@lines){
+		print $ln;
+	}
+
+Read into string
+	
+	my $text = join('', <$fh>);
+	close($fh) or die("Error: Could not close $fn - $!.\n");
+	print "str: $text\n";
+
+Read line after line
+
+	while ( my $ln = <$fh>){ # more eff. then foreach
+		print $ln;
+	}
+	close($fh) or die("Error: Could not close $fn - $!.\n");
+
+

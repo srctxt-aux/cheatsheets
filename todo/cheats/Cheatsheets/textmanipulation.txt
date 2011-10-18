@@ -1,0 +1,123 @@
+Sed Cheatsheet
+==============
+
+    Copyright (C) 2010 Ben
+    04-11-2010, leakin.org/cheats
+    sed,cheatsheets
+
+Basic sed concepts and most important commands.
+
+***
+
+
+### 1. Substitution with 's'
+
+    echo "you suck" | sed 's/suck/rock/'
+
+results in: "you rock"
+
+Or with a file
+
+    sed s/socks/rocks/ infile >outfile
+
+
+### 2. Using other delimiters
+
+When we search in pathes the escaped search term can end in a mess like
+
+    ls . | sed s/\/usr\/local....
+
+So, it's far more readable to use different delimiter, like '|'
+
+    find / -maxdepth 2 | sed 's|/usr/local|/usr/clusterfuck/|' | grep cluster
+
+### 3. Reusing a capture
+
+#### Simple Captures with '&'
+
+With the symbol '&', the whole captured string can be reused.
+
+    echo "hello" | sed 's/hello/Franky says &/'
+
+    Franky says hello
+
+Or with a bit more complex regex
+
+    echo "4 Apples" | sed 's/[0-9]/Amount of apples: &/'
+
+    Amount of apples: 4 Apples
+                      
+    
+#### Precise captures
+
+With the backreferences \(,)\ and \1 the capture is more precicese
+
+    echo "435 Apples" | sed 's|\([0-9]*\).*|Amount of apples: \1|'
+
+    Amount of apples: 435
+
+
+The backreference syntax is not particulary pretty, complex replacements better in Perl.
+
+
+### Edit globally with 'g'
+
+    echo "Fox News is sending fox news" | sed 's/\([Ff]\)ox/\1aux/g'
+
+
+
+## sed
+- inplace search & replace
+- pull particular lines from file
+
+-e
+-n
+-ne
+
+
+sed 1q   p
+
+
+-e q
+
+sed -e '1,/^$/d'
+
+
+s/kka//p
+
+
+### Some Commands
+
+
+#   The trinity of sed, awk and grep  #
+
+    (C) 2010 Ben, leakin.org
+    04-11-2010, cheatsheets
+
+Sed, awk, grep have overlapping use cases, here a small selection.
+
+***
+
+
+Basic sed
+---------
+
+    echo "hello paps" | sed 's/pap/daddy/g'
+
+* s: substitution
+* g: global
+
+
+Basic awk
+---------
+
+    ls -al  | awk '{ print $3 }'
+
+
+Basic grep
+----------
+
+    ls -al | grep -v local
+
+* -v: invert
+* -w: words

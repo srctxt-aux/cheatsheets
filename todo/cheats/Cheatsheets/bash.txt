@@ -1,0 +1,13 @@
+Bash Cheatsheet
+===============
+Some often forgot bash quirks.
+
+    (c) 2011 Ben, srctxt.org
+    cheatsheets, bash
+****
+
+## Directories
+
+### Check if directory exists
+
+    [ -d $p ] || { echo not here ; exit 1; }

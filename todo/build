@@ -1,0 +1,25 @@
+#!/bin/sh
+
+
+dir=$(basename `pwd`  | sed 's/\..*//g')
+
+files="awk bash"
+
+for f in $files; do
+
+    # altdown
+    rm -f ${f}.md
+    altdown ${f}.txt > ${f}.md
+
+    # markdow
+    rm -f ${f}.html
+    md2html ${f}.md
+
+    # deploy
+    rm -f ../${dir}.web/${f}.html
+    mv ${f}.html ../${dir}.web/
+
+    # cleanup
+    rm -f ${f}.md
+done
+

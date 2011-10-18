@@ -1,0 +1,360 @@
+Setup gpg 
+=========
+ben le kin, <ben@lekin.org>
+v1.1, 28. mai 2010
+:tags: setup gpg gnupg
+
+Contents
+--------
+
+<<intro, Introduction>>
+
+<<getstart, Getting started>>
+
+<<usage, Usage>>
+
+<<instmacosx, Installation on Mac OS X>>
+
+
+Introduction 
+-----------
+GnuPG is the GNU project's complete and free implementation of the OpenPGP (PGP=PrettyGoodPrivacy) standard as defined by RFC4880. It can be used to encrypt files.
+
+[[getstart]]
+Getting Started
+---------------
+
+Generate keys
+~~~~~~~~~~~~~
+
+	gpg --gen-key
+
+List keys:
+~~~~~~~~~
+
+public:
+
+    gpg --list-keys
+	
+private:
+
+    gpg --list-secret-keys
+
+
+Encrypt files:
+~~~~~~~~~~~~~
+
+    gpg -e -r ben@lekin.org -o encrfile.txt mysecrets.txt
+
+options:
+- -e:   encrypt
+- -r:   recipient 
+- -o:   output
+
+Decrypting a File
+~~~~~~~~~~~~~~~~~
+
+	gpg -d -o mysecrets.txt mysecrets.txt.gpg
+
+options:
+- -d: decrypt
+- -r: recipient 
+- -o: output
+
+Exporting a public key
+~~~~~~~~~~~~~~~~~~~~~~
+
+    gpg -a -o pubkey.txt --export ben@lekin.org
+
+options:
+  - 'a' : 'armor', store key in plain text
+  - 'o' : output
+
+
+Using the public key 
+~~~~~~~~~~~~~~~~~~~~~
+We are now on a different machine. 
+
+	gpg --import pubkey.txt
+
+and then trust the key
+
+	gpg --edit-key ben@lekin.org
+
+Now you can encrypt the file
+
+gpg -e -r ben@lekin.org mysecrets.txt
+
+
+Backing up the keys
+~~~~~~~~~~~~~~~~~~~
+
+Export the keys:
+
+    # gpg --export -a -o mypublickey.txt ben@lekin.org
+    # gpg --export-secret-key -a -o myprivatekey.txt ben@lekin.org
+
+Keep this files at a save place. Especially the private key. 
+
+Import the keys again:
+
+    # gpg --import myprivatekey.txt
+    # gpg --import mypublickey.txt
+
+
+[[usage]]
+Usage
+-----
+
+How does it work:
+
+    ME <-----> THEOTHER
+
+    THEOTHER --want send secret email--> ME
+
+    ME creating two keys:
+      1. private key
+      2. public key
+
+    ME ---(give public key)---> THEOTHER
+
+    theother encrypts email:
+      publickey(email)=>encrypted email
+
+    and sends it to me:
+      THEOTHER ---(sends encrypted email)---> ME
+
+    me decrypting it:
+      publickey+privatekey(email) => decrypted email
+
+
+### Properties of pgp key ###
+    
+    - each key is associated with an ID: NAME, COMMENT, E-MAIL
+    - a key is additionally locked with passphrase ( in case someone had acces to the private key)
+
+Generate keys
+~~~~~~~~~~~~~
+With the following command you create a new pair of public/private keys:
+
+    # gpg --gen-key
+
+You be asked acouple of questions:
+
+  1. Kind of encryption: dsa, rsa, ...: Take the default
+  2. Expiring date: 0 days, the keys should never expire
+  3. User-ID:
+    Real name: Har Lekin
+    Email address: ben@lekin.org
+    Comment: mainkey
+
+And thand give a **passphrase**. Use uper and lower case, numbers and punctuation. 
+
+### Key storage ###
+The keys are now stored in keyrings:
+    private keys -> private keyring
+    public keys  -> public keyring
+
+Public keys: This is how you list the public keys :
+
+    gpg --list-keys
+	
+Private keys: This is how you list the private keys :
+
+    gpg --list-secret-keys
+
+Encrypting files
+~~~~~~~~~~~~~~~~
+This is how a file for a specifig recipient - in this it's me - is going to be encrypted. The email in the keypair has to be used:
+
+    gpg --key-list # shows the ID incl. my email from the private key
+
+Now we encrypt a file with the options
+  - 'e' :   encrypt
+  - 'r' :   recipient 
+
+    gpg -e -r ben@lekin.org mysecrets.txt
+
+An encrypted file mysecrets.txt.gpg is created. With -o you can specify the output.
+
+    gpg -e -r ben@lekin.org -o encrfile.txt mysecrets.txt
+
+will produce an encrypted file encrfile.txt, which draws less attention.
+
+Decrypting a File
+~~~~~~~~~~~~~~~~~
+In case you have the private key, you can decrypt a encrypted file with the options:
+  - 'd' : decrypt
+  - 'o' : output
+
+    gpg -d -o mysecrets.txt mysecrets.txt.gpg
+
+
+Sharing public keys
+~~~~~~~~~~~~~~~~~~~~
+### Exporting the public key ###
+The public ring in the keyring has to be exported, so other people can add it to their keyring:
+  - 'a' : 'armor', store key in plain text
+  - 'o' : output
+
+    gpg -a -o pubkey.txt --export ben@lekin.org
+
+
+### Using the public key ###
+We are now on a different machine. The person who wants you send the encrypted message, has to import the key first
+
+    # gpg --import pubkey.txt
+
+and then trust the key
+
+    # gpg --edit-key ben@lekin.org
+    # ...
+    # Command> trust
+    # ...
+    # your decision? 5
+    # Command> quit
+
+Now you can encrypt the file
+
+    # gpg -e -r ben@lekin.org mysecrets.txt
+
+
+Backing up the keys
+~~~~~~~~~~~~~~~~~~~
+When the keys are lost, the data will also. Therefore: Backup!
+
+Export the keys:
+
+    # gpg --export -a -o mypublickey.txt ben@lekin.org
+    # gpg --export-secret-key -a -o myprivatekey.txt ben@lekin.org
+
+Keep this files at a save place. Especially the private key. 
+
+Import the keys again:
+
+    # gpg --import myprivatekey.txt
+    # gpg --import mypublickey.txt
+
+[[instmacosx]]
+Installation on Mac OS X
+-------------------------
+
+2. Install Dependencies 
+~~~~~~~~~~~~~~~~~~~~~~~
+I had to try different versions of Gnupg to get it installed. During this process I was asked to install quite a few dependencies. I recommend to install the, but I'm not 100% sure if they are really necessary. The easiest thing is to copy the whole block and then paste it in a Terminal.app window
+
+
+	echo "build libgpg-error"
+	mkdir -p /usr/local/src && cd /usr/local/src
+	curl -O ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-1.6.tar.bz2
+	tar xfj libgpg-error-1.6.tar.bz2 && cd libgpg-error-1.6
+	./configure -- prefix=/usr/local && make && sudo make install
+
+	echo "build libgcrypt"
+	cd /usr/local/src
+	curl -O ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-1.4.1.tar.gz
+	tar xfz libgcrypt-1.4.1.tar.gz && cd libgcrypt-1.4.1
+	./configure -- prefix=/usr/local && make && sudo make install
+
+	echo "build pth"
+	cd /usr/local/src
+	curl -O ftp://ftp.gnu.org/gnu/pth/pth-2.0.7.tar.gz
+	tar xfz pth-2.0.7.tar.gz && cd pth-2.0.7.tar.gz
+	./configure -- prefix=/usr/local && make && sudo make install
+
+	echo "build libassuan"
+	cd /usr/local/src
+	curl -O  ftp://ftp.gnupg.org/gcrypt/libassuan/libassuan-1.0.4.tar.bz2
+	tar xfj libassuan-1.0.4.tar.bz2 && cd libassuan-1.0.4
+	make uninstall
+	./configure -- prefix=/usr/local && make && sudo make install
+
+	echo "build libksba"
+	cd /usr/local/src
+	curl -O ftp://ftp.gnupg.org/gcrypt/libksba/libksba-1.0.3.tar.bz2
+	tar xfj libksba-1.0.3.tar.bz2 && cd libksba-1.0.3
+	./configure -- prefix=/usr/local && make && sudo make install
+
+	echo "build pinentry"
+	cd /usr/local/src
+	curl -O ftp://ftp.gnupg.org/gcrypt/pinentry/pinentry-0.7.5.tar.gz
+	tar xfz pinentry-0.7.5.tar.gz && cd pinentry-0.7.5
+	./configure -- prefix=/usr/local && make && sudo make install
+	cd ~
+
+3. Install GNUPG 
+~~~~~~~~~~~~~~~~
+I've tried a few versions, also the very latest ones. This is the version I got compiled without any big problems 
+
+	cd /usr/local/src
+	curl -O ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-1.4.7.tar.bz2
+	tar xfvj gnupg-1.4.7.tar.bz2 && cd gnupg-1.4.7 
+	./configure --prefix=/usr/local
+	make && sudo make install
+	cd ~
+	
+	
+4. Get the Keys 
+---------------
+
+### a. Download the File and the Keyfile ### 
+
+The simplest thing is to show it with an example
+
+Get the apache and its gpg key of 
+
+	mkdir -p /usr/local/src && cd /usr/local/src 
+	wget http://archive.apache.org/dist/httpd/httpd-2.2.2.tar.bz2
+	wget http://archive.apache.org/dist/httpd/httpd-2.2.2.tar.bz2.asc
+	
+### b. Check the Keyfile and Get the 'key ID' ###
+
+	$ gpg httpd-2.2.2.tar.bz2.asc
+	gpg: Signature made Fri Apr 21 20:59:05 2006 PDT using DSA key ID 31748H00
+	gpg: Can't check signature: public key not found
+
+The key ID is 31748H00 you use it for generate the public key
+
+### c. Get the public key ### 
+
+	$ gpg --keyserver pgpkeys.mit.edu --recv-key 31748H00
+	gpg: requesting key 31748H00 from hkp server pgpkeys.mit.edu
+	...
+	gpg: Total number processed: 1
+	gpg:               imported: 1
+	
+
+Print out a list of installed keys	
+	gpg --list-keys
+	
+Print out your fingerprint
+
+	gpg --fingerprint 31748H00 
+	pub   1024D/31748H00 2004-01-17
+      	Key fingerprint = 39F6 691A 0ECF 0C50 E8CB  849C F788 75F4 4272 1F00
+		uid                  Paul Querna <chip@force-elite.com>
+		...
+		sub   2048g/7A2BE310 2004-01-17
+
+
+### 5. Test GPG ###
+	
+Veryfy the downloaded file
+
+	$ gpg --verify httpd-2.2.2.tar.bz2.asc  httpd-2.2.2.tar.bz2
+	gpg: Signature made Fri Apr 21 20:59:05 2006 PDT using DSA key ID 42721F00
+	gpg: Good signature from "Paul Querna <chip@force-elite.com>"
+	gpg:                 aka "Paul Querna <chip@cyan.com>"
+	...
+	gpg: WARNING: This key is not certified with a trusted signature!
+	gpg:          There is no indication that the signature belongs to the owner.
+	Primary key fingerprint: 39F6 691A 0ECF 0C50 E8BB  849C F788 75F6 4272 1F00
+
+
+So we have verified that the downloaded software has a valid signature, i.e. it has not been altered or modified after this signature has been made. However, we still do not know who has created this signature. It is your own decision whether you trust a key or no
+
+
+
+	
+
+	

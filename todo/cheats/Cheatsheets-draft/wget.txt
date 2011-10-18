@@ -1,0 +1,11 @@
+Wget cheatsheet
+===============
+
+To mirror site:
+    wget -r http://www.site.com
+
+To mirror the site and localise all of the urls:
+    wget --convert-links -r http://www.site.com
+
+To mirror the site and save the files as .html:
+    wget --html-extension -r http://www.site.com

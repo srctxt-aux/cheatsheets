@@ -1,0 +1,16 @@
+Vim Cheatsheet
+==============
+
+    15.10.2010, ben@leakin.org
+    cheatsheet / vim
+
+----------------
+
+
+A few tips
+----------
+
+gd
+: Go to Definition
+
+

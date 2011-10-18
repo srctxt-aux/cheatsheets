@@ -1,0 +1,29 @@
+<h1>SSH Cheatsheet</h1>
+
+<pre><code>by: Ben, srctxt.org
+in: cheatsheets, ssh
+</code></pre>
+
+<p><em>Shows how to generate and manage ssh keyfiles.</em></p>
+
+<hr />
+
+<h3>Backup existing ssh setup</h3>
+
+<pre><code>mv ~/.ssh ~/.ssh{,.orig}
+mkdir ~/.ssh
+</code></pre>
+
+<h3>Generate a key</h3>
+
+<pre><code>ssh-keygen -t rsa -C 'bob@mail.com'
+</code></pre>
+
+<p>Options:
+-t     type of key
+-C     Comment</p>
+
+<p>Note:
+- Please give a good passphrase when asked.
+- I like to define a unique name to the keyfile. During ssh-keygen, give the whole path '/home/user/.ssh/id<em>rsa</em>mykey'
+- Add the new file after the setup with <code>ssh-add</code></p>

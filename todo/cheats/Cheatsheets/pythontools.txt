@@ -1,0 +1,30 @@
+#   Cheatsheet Python Tools      #
+
+    (C) 2010 Ben leakin.org
+    16-11-2010, cheatsheets
+
+The most important Python tools quick explained.
+
+***
+
+Important Python tools
+
+virtualenv
+----------
+
+virtualenv wrapper
+------------------
+
+
+pip
+---
+
+
+fabric
+------
+
+
+
+
+
+

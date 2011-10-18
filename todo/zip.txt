@@ -1,0 +1,34 @@
+
+
+
+
+Create data.zip
+
+    cd myfolder/
+    zip data *
+
+
+including subdirs
+
+    cd myfolder/
+    zip -r data *
+
+Unzip
+
+    unzip data.zip
+
+Get summary message , is zip OK/NOK
+
+    unzipt -tq data.zip
+
+Extract ONE file
+
+    unzip data.zip myfile.txt
+
+Extract ALL file into a directory:
+
+    unzip data.zip -d mydir/
+
+List all file in the .zip file:
+
+    unzip -l data.zip

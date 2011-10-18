@@ -1,0 +1,38 @@
+Xargs Cheatsheet
+=================
+
+    (C) 2010 Ben, srctxt.org
+    cheatsheet, xargs
+
+Collection of often used shell stuff including 'xargs'
+
+---
+
+
+Use a variable name with '-I'
+
+    ls | xargs -I {} mv {} 20080815-{}
+
+
+    ls dir1 | xargs -I {} -t mv dir1/{} dir1/{}
+
+Issue the command as well with '-t'
+
+
+
+loop through File Contents lines!:
+
+    cat iplist | xargs -n1 nmap -sV
+
+
+### Xargs and find
+
+Xargs interpretes whithespace as a new value. This is a problem if a filename
+contains spaces. To solve this problem use in:
+
+        find: -print0
+        xargs: -0
+
+for example:
+
+        find /tmp -iname 'bad name'  -print0 | xargs -0 echo
